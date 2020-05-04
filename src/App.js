@@ -18,12 +18,13 @@ const googleLogin = () => {
 const db_prc = () => {
   var db = firebase.firestore();
   let docRef = db.collection('users').doc('alovelace');
-
+  
   //firesbase 프로젝트의 데이터베이스 들어가면 확인가능
   let setAda = docRef.set({
     first: 'Ada',
     last: 'Lovelace',
-    born: 1815
+    born: 1815,
+    anyword:'blabla'
   });
 }
 
