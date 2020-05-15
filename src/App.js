@@ -6,6 +6,10 @@ import * as firebase from "firebase"
 import {auth, googleProvider} from "./fb"
 import CalenderBody from './ui_comp/CalenderBody'
 import Topblock from './ui_comp/Topblock'
+<<<<<<< Updated upstream
+=======
+import { Container,Button, Icon, Menu, Input, Dropdown } from 'semantic-ui-react'
+>>>>>>> Stashed changes
 
 const googleLogin = () => {
     auth.signInWithPopup(googleProvider).then(function(result) {
@@ -31,7 +35,18 @@ const db_prc = () => {
   });
 }
 
+<<<<<<< Updated upstream
 function App() {
+=======
+class App extends Component {
+  constructor(props){
+    super(props);
+    this.state={
+      mode:'login',
+    }
+  }
+  render(){
+>>>>>>> Stashed changes
   return (
     <div >
       <h3 className={cs.head}> CALILEO </h3>
@@ -41,7 +56,12 @@ function App() {
       <button onClick = {()=>db_prc()}> firestore data insert </button>
     </div>
 
+<<<<<<< Updated upstream
   );
+=======
+    );
+  }
+>>>>>>> Stashed changes
 }
 
 export default App;
