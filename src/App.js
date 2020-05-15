@@ -4,7 +4,6 @@ import cs from './App.module.css';
 
 import * as firebase from "firebase"
 import {auth, googleProvider} from "./fb"
-import CalenderBody from './ui_comp/CalenderBody'
 import Topblock from './ui_comp/Topblock'
 
 import CalenderBody from './ui_comp/CalenderBody'
@@ -35,55 +34,6 @@ const db_prc = () => {
   });
 }
 
-
-const Topblock = () => (
-  <div>
-  <Container>
-    <Menu secondary>
-      <Menu.Menu position='left'>
-        <Menu.Item>
-          <Button basic>
-            <Button.Content>
-              <Icon name='list ul' />
-            </Button.Content>
-          </Button>
-        </Menu.Item>
-      </Menu.Menu>
-      <Menu.Item>
-      <Button basic>
-        <Button.Content>
-          <Icon name='save outline' />
-        </Button.Content>
-      </Button>
-      </Menu.Item>
-      <Menu.Menu position='center'>
-        <Menu.Item>
-          <Button.Group basic size='big' >
-            <Button icon='chevron left' />
-            <Button content='2020년 5월' />
-            <Button icon='chevron right' />
-          </Button.Group>
-        </Menu.Item>
-      </Menu.Menu>
-      <Menu.Menu position='right'>
-        <Menu.Item>
-          <Selection />
-        </Menu.Item>
-        <Menu.Item>
-          <Input icon='search' placeholder='Search task...' />
-        </Menu.Item>
-        <Menu.Item>
-          <Button onClick = {()=>googleLogin()}>
-            <Button.Content>
-              <Icon name='user' />Sign-in
-            </Button.Content>
-          </Button>
-        </Menu.Item>
-      </Menu.Menu>
-    </Menu>
-  </Container>
-  </div>
-)
 class App extends Component {
   constructor(props){
     super(props);
@@ -105,7 +55,7 @@ class App extends Component {
 }
 
 
-    );
+
   }
-}
+
 export default App;
