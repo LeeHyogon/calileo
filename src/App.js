@@ -1,7 +1,13 @@
+<<<<<<< Updated upstream
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import cs from './App.module.css';
 import './App.css';
+=======
+import React,{Component, isValidElement} from 'react';
+import logo from './logo.svg';
+import cs from './App.module.css';
+>>>>>>> Stashed changes
 import * as firebase from "firebase"
 import {auth, googleProvider} from "./fb"
 
@@ -20,6 +26,10 @@ const googleLogin = () => {
     let credential = error.credential;
   })
 }
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
 const friendOptions = [
   {
     key: 'Y',
@@ -100,6 +110,7 @@ const Topblock = () => (
   </Container>
   </div>
 )
+<<<<<<< Updated upstream
 
 class App extends Component{
   constructor(props){
@@ -119,6 +130,26 @@ class App extends Component{
     </div>
     );
 
+=======
+class App extends Component {
+  constructor(props){
+    super(props);
+    this.state={
+      mode:'login',
+    }
+  }
+  render(){
+  return (
+     <div >
+        {/* <h3 className={cs.head}> CALILEO </h3> */}
+       {/* <Topblock /> */}
+        {/* <CalenderBody /> */}
+       <button onClick = {()=>googleLogin()}> googleLogin </button>
+
+      </div>
+
+    );
+>>>>>>> Stashed changes
   }
 }
 export default App;
