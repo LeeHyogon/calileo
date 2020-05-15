@@ -5,8 +5,7 @@ import cs from './App.module.css';
 import * as firebase from "firebase"
 import {auth, googleProvider} from "./fb"
 import CalenderBody from './ui_comp/CalenderBody'
-import { Container,Button, Icon, Divider, Grid,
-  Header, Menu, Message, Segment, Table, Input, Dropdown } from 'semantic-ui-react'
+import { Container,Button, Icon, Menu, Input, Dropdown } from 'semantic-ui-react'
 
 const googleLogin = () => {
     auth.signInWithPopup(googleProvider).then(function(result) {
@@ -56,7 +55,7 @@ const friendOptions = [
 
 const Selection = () => (
   <Dropdown
-    placeholder='Select View'
+    placeholder='Select Date'
     fluid
     selection
     options={friendOptions}
