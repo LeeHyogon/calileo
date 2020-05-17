@@ -10,7 +10,7 @@ class Main extends Component{
   render(){
     return(
       <div>
-      <Topblock/>
+      <Topblock userName = {this.props.userName}/>
       <CalenderBody/>
       </div>
     )

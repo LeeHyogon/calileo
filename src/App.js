@@ -1,28 +1,40 @@
-import React, { Component} from "react";
+import React, { Component } from "react";
 import cs from "./CSS/App.module.css";
 
-import Login from "./pages/Login"
-import Main from "./pages/Main"
+import Login from "./pages/Login";
+import Main from "./pages/Main";
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isLoginned : false
+      isLoginned: false,
+      userName: ""
     };
   }
+
+  permit = loginState => {
+    this.setState({
+      userName: loginState.name,
+      isLoginned: loginState.loginState
+    });
+  };
+
   render() {
     return (
       <div>
         <h3 className={cs.head}> CALILEO </h3>
-        {this.state.isLoginned ? <Main/>: <Login/> }
+        {this.state.isLoginned ? (
+          <Main userName={this.state.userName} />
+        ) : (
+          <Login login={this.permit} />
+        )}
       </div>
     );
   }
 }
 
 export default App;
-
 
 // import {
 //   Container,
@@ -45,6 +57,5 @@ export default App;
 //     anyword:'blabla'
 //   });
 // }
-
 
 // <button onClick={() => db_prc()}> firestore data insert </button>
