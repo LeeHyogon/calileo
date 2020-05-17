@@ -32,7 +32,7 @@ const Selection = () => (
   />
 )
 
-const Topblock = () => (
+const Topblock = (props) => (
   <div>
   <Container>
     <Menu secondary>
@@ -71,7 +71,7 @@ const Topblock = () => (
         <Menu.Item>
           <Button>
             <Button.Content>
-              <Icon name='user' />Sign-in
+              <Icon name='user' />{props.userName}
             </Button.Content>
           </Button>
         </Menu.Item>

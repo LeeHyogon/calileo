@@ -1,12 +1,16 @@
-import {auth, googleProvider} from "./fb"
+import { auth, googleProvider } from "./fb";
 
-const googleLogin = () => {
-  auth
+const googleLogin = callback => {
+  return auth
     .signInWithPopup(googleProvider)
     .then(function(result) {
       let token = result.credential.accessToken;
       let user = result.user;
       console.log(user.emailVerified);
+      return { name: user.displayName, loginState: user.emailVerified };
+    })
+    .then(res => {
+      callback(res);
     })
     .catch(function(error) {
       let errorCode = error.code;
@@ -16,4 +20,4 @@ const googleLogin = () => {
     });
 };
 
-export default googleLogin
+export default googleLogin;
