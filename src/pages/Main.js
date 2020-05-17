@@ -1,5 +1,5 @@
 import React, { Component} from "react";
-import CalenderBody from "../UI/CalenderBody"
+import CalendarBody from "../UI/CalendarBody"
 import Topblock from "../UI/Topblock"
 
 class Main extends Component{
@@ -11,7 +11,7 @@ class Main extends Component{
     return(
       <div>
       <Topblock userName = {this.props.userName}/>
-      <CalenderBody/>
+      <CalendarBody/>
       </div>
     )
   }

@@ -1,7 +1,7 @@
 import React from 'react'
 import { Grid, Menu, Table, Segment,Checkbox, Icon, Button } from 'semantic-ui-react'
 
-const SubCalenderBody = () =>(
+const SubCalendarBody = () =>(
   <Segment>
     <p>task1</p>
     <Menu fluid vertical>
@@ -12,4 +12,4 @@ const SubCalenderBody = () =>(
   </Segment>
 )
 
-export default SubCalenderBody
+export default SubCalendarBody
