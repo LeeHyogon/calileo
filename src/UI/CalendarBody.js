@@ -1,19 +1,19 @@
 import React from 'react'
-import MainCalenderBody from './MainCalenderBody'
-import SubCalenderBody from './SubCalenderBody'
+import MainCalendarBody from './MainCalendarBody'
+import SubCalendarBody from './SubCalendarBody'
 import { Grid } from 'semantic-ui-react'
 
-const CalenderBody = () => (
+const CalendarBody = () => (
   <Grid>
     <Grid.Column width={1}>
     </Grid.Column>
     <Grid.Column width={5}>
-      <SubCalenderBody />
+      <SubCalendarBody />
     </Grid.Column>
     <Grid.Column width={9}>
-      <MainCalenderBody />
+      <MainCalendarBody />
     </Grid.Column>
   </Grid>
 )
 
-export default CalenderBody
+export default CalendarBody
