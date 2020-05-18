@@ -1,7 +1,7 @@
 import React from 'react'
 import { Grid, Menu, Table, Segment,Checkbox, Icon, Button } from 'semantic-ui-react'
 
-const MainCalenderBody = () => (
+const MainCalendarBody = () => (
   <Table celled >
     <Table.Header>
       <Table.HeaderCell width={2}>Sun</Table.HeaderCell>
@@ -61,4 +61,4 @@ const MainCalenderBody = () => (
   </Table>
 )
 
-export default MainCalenderBody
+export default MainCalendarBody

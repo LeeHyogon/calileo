@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React,{Component, isValidElement} from 'react';
 import logo from './logo.svg';
 import cs from './App.module.css';
@@ -41,6 +42,13 @@ const friendOptions = [
     value: 'D',
   },
 ]
+=======
+import React, { Component } from "react";
+import cs from "./CSS/App.module.css";
+
+import Login from "./pages/Login";
+import Main from "./pages/Main";
+>>>>>>> 1bee4f7cd719fe533eed157d9e41952f96362ef3
 
 const Selection = () => (
   <Dropdown
@@ -100,12 +108,14 @@ const Topblock = () => (
   </div>
 )
 class App extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
-    this.state={
-      mode:'login',
-    }
+    this.state = {
+      isLoginned: false,
+      userName: ""
+    };
   }
+<<<<<<< HEAD
   render(){
   return (
      <div >
@@ -116,7 +126,52 @@ class App extends Component {
 
       </div>
 
+=======
+>>>>>>> 1bee4f7cd719fe533eed157d9e41952f96362ef3
 
+  permit = loginState => {
+    this.setState({
+      userName: loginState.name,
+      isLoginned: loginState.loginState
+    });
+  };
+
+  render() {
+    return (
+      <div>
+        <h3 className={cs.head}> CALILEO </h3>
+        {this.state.isLoginned ? (
+          <Main userName={this.state.userName} />
+        ) : (
+          <Login login={this.permit} />
+        )}
+      </div>
+    );
   }
+}
 
 export default App;
+
+// import {
+//   Container,
+//   Button,
+//   Icon,
+//   Menu,
+//   Input,
+//   Dropdown
+// } from "semantic-ui-react";
+
+// const db_prc = () => {
+//   var db = firebase.firestore();
+//   let docRef = db.collection('users').doc('alovelace');
+//
+//   //firesbase 프로젝트의 데이터베이스 들어가면 확인가능
+//   let setAda = docRef.set({
+//     first: 'Ada',
+//     last: 'Lovelace',
+//     born: 1815,
+//     anyword:'blabla'
+//   });
+// }
+
+// <button onClick={() => db_prc()}> firestore data insert </button>
