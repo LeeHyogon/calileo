@@ -55,7 +55,9 @@ const Topblock = (props) => (
       <Menu.Menu position='center'>
         <Menu.Item>
           <Button.Group basic size='big' >
-            <Button icon='chevron left' />
+            {/* 이 버튼을 누르면 MainCalendar 변환
+            어떻게 해야될지? */}
+            <Button icon='chevron left'  />
             <Button content='2020년 5월' />
             <Button icon='chevron right' />
           </Button.Group>
