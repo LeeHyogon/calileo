@@ -4,63 +4,6 @@ import cs from "./CSS/App.module.css";
 import Login from "./pages/Login";
 import Main from "./pages/Main";
 
-const Selection = () => (
-  <Dropdown
-    placeholder='Select View'
-    fluid
-    selection
-    options={friendOptions}
-  />
-)
-
-const Topblock = () => (
-  <div>
-  <Container>
-    <Menu secondary>
-      <Menu.Menu position='left'>
-        <Menu.Item>
-          <Button basic>
-            <Button.Content>
-              <Icon name='list ul' />
-            </Button.Content>
-          </Button>
-        </Menu.Item>
-      </Menu.Menu>
-      <Menu.Item>
-      <Button basic>
-        <Button.Content>
-          <Icon name='save outline' />
-        </Button.Content>
-      </Button>
-      </Menu.Item>
-      <Menu.Menu position='center'>
-        <Menu.Item>
-          <Button.Group basic size='big' >
-            <Button icon='chevron left' />
-            <Button content='2020년 5월' />
-            <Button icon='chevron right' />
-          </Button.Group>
-        </Menu.Item>
-      </Menu.Menu>
-      <Menu.Menu position='right'>
-        <Menu.Item>
-          <Selection />
-        </Menu.Item>
-        <Menu.Item>
-          <Input icon='search' placeholder='Search task...' />
-        </Menu.Item>
-        <Menu.Item>
-          <Button onClick = {()=>googleLogin()}>
-            <Button.Content>
-              <Icon name='user' />Sign-in
-            </Button.Content>
-          </Button>
-        </Menu.Item>
-      </Menu.Menu>
-    </Menu>
-  </Container>
-  </div>
-)
 class App extends Component {
   constructor(props) {
     super(props);
@@ -69,19 +12,7 @@ class App extends Component {
       userName: ""
     };
   }
-<<<<<<< HEAD
-  render(){
-  return (
-     <div >
-        {/* <h3 className={cs.head}> CALILEO </h3> */}
-       {/* <Topblock /> */}
-        {/* <CalenderBody /> */}
-       <button onClick = {()=>googleLogin()}> googleLogin </button>
-
-      </div>
-
-=======
->>>>>>> 1bee4f7cd719fe533eed157d9e41952f96362ef3
+  // 연습용 주석 달았음.
 
   permit = loginState => {
     this.setState({
