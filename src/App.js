@@ -13,6 +13,7 @@ class App extends Component {
     };
   }
   // 연습용 주석 달았음.
+  //이게 효곤한테 추가되면됨.
 
   permit = loginState => {
     this.setState({
