@@ -21,9 +21,14 @@ class MainCalendarBody extends Component{
       <Table celled >
         {Datetitle(this.props.pivotDay)}
         <Table.Body>
-        {_.map(Array(6), ()=>(          <Table.Row>
-                  {_.map(Array(7), () =>
-                    <Table.Cell selectable verticalAlign='top'><br /><br /><br /></Table.Cell> )}
+        {_.map(Array(24), (val, timeIndex)=>(          <Table.Row>
+                  {_.map(Array(7), (val2, dayIndex) =>{
+                    let timeVal = moment(this.props.pivotDay).add(dayIndex, 'd').add(timeIndex, 'h')
+
+                    return(
+                      <Table.Cell selectable verticalAlign='top' onClick = {()=>this.props.createNew(timeVal)}>
+                      {timeVal.format("HH:mm")}</Table.Cell> )
+                  })}
                   </Table.Row>))}
 
 
