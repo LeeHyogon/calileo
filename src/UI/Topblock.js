@@ -1,4 +1,6 @@
 import React from 'react';
+import moment from 'moment'
+
 import { Container,Button, Icon, Menu, Input, Dropdown } from 'semantic-ui-react'
 const friendOptions = [
   {
@@ -57,9 +59,9 @@ const Topblock = (props) => (
           <Button.Group basic size='big' >
             {/* 이 버튼을 누르면 MainCalendar 변환
             어떻게 해야될지? */}
-            <Button icon='chevron left'  />
-            <Button content='2020년 5월' />
-            <Button icon='chevron right' />
+            <Button icon='chevron left'  onClick = {()=>props.changePivotDay(moment(props.pivotDay).subtract(1, "w"))}/>
+            <Button content={moment(props.pivotDay).format("YYYY년 MM월")} />
+            <Button icon='chevron right' onClick = {()=>props.changePivotDay(moment(props.pivotDay).add(1, "w"))} />
           </Button.Group>
         </Menu.Item>
       </Menu.Menu>

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Button } from "semantic-ui-react";
 
 import googleLogin from "../server/auth";
+import LoginForm from "../UI/LoginForm"
 
 class Login extends Component {
   constructor(props) {
@@ -11,9 +12,7 @@ class Login extends Component {
   render() {
     return (
       <div>
-        <Button secondary onClick={() => googleLogin(this.props.login)}>
-          Login to Proceed
-        </Button>
+      <LoginForm googleLogin = {() => googleLogin(this.props.login)} />
       </div>
     );
   }
