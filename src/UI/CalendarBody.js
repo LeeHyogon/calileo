@@ -11,7 +11,8 @@ class CreateEvent extends Component{
     super(props);
     this.state = {
       startDate :this.props.createNewTime,
-        endDate : "",
+      // moment(this.props.createNewTime).add(1,'h').format("YYYY.MM.DD MM:SS")
+        endDate :"",
           eventDetail : ""
     }
    }
@@ -20,7 +21,6 @@ makeEvent = e => {
   this.setState({[e.target.name] : e.target.value})
 
 }
-
 
   render(){
     return(<div>
@@ -37,6 +37,7 @@ class CalendarBody extends Component{
   constructor(props) {
     super(props);
     this.state = {
+      eventCnt: 0,
       isCreateNew : false,
       createNewTime : "",
       eventList : []
@@ -49,11 +50,11 @@ class CalendarBody extends Component{
  }
 
 enlistNew = (props) => {
-  this.setState({eventList : _.concat(this.state.eventList, props), isCreateNew : false} )
+  this.state.eventCnt+=1;
+  this.setState({eventCnt : this.state.eventCnt,eventList : _.concat(this.state.eventList, props), isCreateNew : false} )
 }
 
   render(){
-    console.log(this.eventList)
     return(
       <Grid>
         <Grid.Column width={1}>
@@ -68,6 +69,9 @@ enlistNew = (props) => {
           <MainCalendarBody
             createNew = {this.createNew}
              pivotDay={this.props.pivotDay}
+             //이벤트리스트 인덱스 넘겨주고.
+             eventList={this.state.eventList}
+             eventCnt={this.state.eventCnt}
           />
         </Grid.Column>
       </Grid>
