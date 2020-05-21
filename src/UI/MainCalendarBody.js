@@ -5,7 +5,7 @@ import _ from "lodash"
 import { Grid, Menu, Table, Segment,Checkbox, Icon, Button } from 'semantic-ui-react'
 
 function Datetitle(props){
-  return <Table.Header>{_.map(Array(7),(val, index)=>    
+  return <Table.Header>{_.map(Array(7),(val, index)=>
       <Table.HeaderCell width={2}>{moment(props).add(index, 'd').format("MM/DD(ddd)")}
       </Table.HeaderCell>)}
   </Table.Header>
@@ -15,14 +15,14 @@ class MainCalendarBody extends Component{
   constructor(props) {
     super(props);
     this.state = {
-    
+
     }
   }
-  
+
   render(){
     var index=this.props.eventCnt; var i=0;
     //시작,종료시간 저장 배열
-    var startTime=new Array(); 
+    var startTime=new Array();
     var endTime=new Array();
     console.log(this.props);
     while(i<index){
@@ -34,7 +34,7 @@ class MainCalendarBody extends Component{
       <Table celled >
         {Datetitle(this.props.pivotDay)}
         <Table.Body>
-        {_.map(Array(24), (val, timeIndex)=>(          
+        {_.map(Array(24), (val, timeIndex)=>(
                   <Table.Row >
                   {_.map(Array(7), (val2, dayIndex) =>{
                     let timeVal = moment(this.props.pivotDay).add(dayIndex, 'd').add(timeIndex, 'h');
@@ -50,9 +50,9 @@ class MainCalendarBody extends Component{
                       i+=1;
                     }
                     return(
-                      <Table.Cell style={{backgroundColor : ChkTime ?'blue': 'white'}}
+                      <Table.Cell style={{backgroundColor : ChkTime ?'yellow': 'white'}}
                                     selectable verticalAlign='top' onClick = {()=>this.props.createNew(timeVal)
-                                    
+
                       } >
                       {timeVal.format("HH:mm")}</Table.Cell>)
 
@@ -61,7 +61,7 @@ class MainCalendarBody extends Component{
         </Table.Body>
         {/* {JSON.stringify(this.props.eventList)} */}
       </Table>
-      
+
     );
   }
 }
