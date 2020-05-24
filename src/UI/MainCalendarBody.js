@@ -20,16 +20,14 @@ class MainCalendarBody extends Component{
   }
 
   render(){
-    var index=this.props.eventCnt; var i=0;
-    //시작,종료시간 저장 배열
-    var startTime=new Array();
-    var endTime=new Array();
-    console.log(this.props);
-    while(i<index){
-      startTime[i]=moment(this.props.eventList[i].startTime);
-      endTime[i]=moment(this.props.eventList[i].endTime);
-      i+=1;
-    }
+    var index=this.props.eventCnt; 
+    var startTime=[];
+    var endTime=[];
+    var i=0;
+    //console.log(this.props);
+     startTime=_.map(this.props.eventList,'startTime');
+     endTime=_.map(this.props.eventList,'endTime');
+    
     return(
       <Table celled >
         {Datetitle(this.props.pivotDay)}
@@ -38,12 +36,12 @@ class MainCalendarBody extends Component{
                   <Table.Row >
                   {_.map(Array(7), (val2, dayIndex) =>{
                     let timeVal = moment(this.props.pivotDay).add(dayIndex, 'd').add(timeIndex, 'h');
-                    i=0;
+                    var i=0;
                     var ChkTime=false;
                     while(i<index){
-                      if(timeVal.isBetween(moment(startTime[i],"YYYY:DD:HH" ),moment(endTime[i],"YYYY:DD:HH"))
-                      || timeVal.isSame(startTime[i],"YYYY:DD:HH")
-                      || timeVal.isSame(endTime[i],"YYYY:DD:HH")
+                      if(timeVal.isBetween(moment(startTime[i] ),moment(endTime[i]))
+                      || timeVal.isSame(startTime[i])
+                      || timeVal.isSame(endTime[i])
                       ){
                         ChkTime=true
                       }
@@ -52,9 +50,10 @@ class MainCalendarBody extends Component{
                     return(
                       <Table.Cell style={{backgroundColor : ChkTime ?'yellow': 'white'}}
                                     selectable verticalAlign='top' onClick = {()=>this.props.createNew(timeVal)
-
                       } >
-                      {timeVal.format("HH:mm")}</Table.Cell>)
+                        {/* {ChkTime ? <Button>{timeVal.format("HH:mm")}</Button>: timeVal.format("HH:mm")} */}
+                        {timeVal.format("HH:mm")}
+                      </Table.Cell>)
 
                   })}
                   </Table.Row>))}

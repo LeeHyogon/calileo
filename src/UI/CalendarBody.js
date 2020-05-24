@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import moment from 'moment'
 import _ from "lodash"
-
 import MainCalendarBody from './MainCalendarBody'
 import SubCalendarBody from './SubCalendarBody'
 import { Grid, Input, Button } from 'semantic-ui-react'
@@ -21,7 +20,6 @@ makeEvent = e => {
   this.setState({[e.target.name] : e.target.value})
 
 }
-
   render(){
     return(<div>
       <Input name = "startDate" placeholder = "StartDate" value = {this.state.startDate}
@@ -46,7 +44,6 @@ class CalendarBody extends Component{
 
  createNew = (props)=>{
    this.setState({isCreateNew : true, createNewTime:props.format("YYYY.MM.DD HH:mm")})
-
  }
 
 enlistNew = (props) => {
@@ -69,7 +66,7 @@ enlistNew = (props) => {
           <MainCalendarBody
             createNew = {this.createNew}
              pivotDay={this.props.pivotDay}
-             //이벤트리스트 인덱스 넘겨주고.
+            
              eventList={this.state.eventList}
              eventCnt={this.state.eventCnt}
           />
