@@ -50,7 +50,6 @@ enlistNew = (props) => {
   this.state.eventCnt+=1;
   this.setState({eventCnt : this.state.eventCnt,eventList : _.concat(this.state.eventList, props), isCreateNew : false} )
 }
-
   render(){
     return(
       <Grid>
@@ -66,7 +65,6 @@ enlistNew = (props) => {
           <MainCalendarBody
             createNew = {this.createNew}
              pivotDay={this.props.pivotDay}
-            
              eventList={this.state.eventList}
              eventCnt={this.state.eventCnt}
           />
