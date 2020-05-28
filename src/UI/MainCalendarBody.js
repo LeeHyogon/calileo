@@ -12,13 +12,14 @@ function Datetitle(props){
 };
 
 const StyledButton = styled.button`
+  z-index: 1;
   padding: 0.375rem 0.75rem;
   border-radius: 0.25rem;
   font-size: 1rem;
   line-height: 1.5;
   border: 1px solid lightgray;
   height: ${(props) => props.height || "10vh"};
-  position: relative;
+  position: absolute;
   left: ${(props) => props.left || "10vh"};
   top: ${(props) => props.top || "10vh"};
   
@@ -65,8 +66,8 @@ class MainCalendarBody extends Component{
     return(
       <Table celled >
         {Datetitle(pivotDay)}
-      <div>{mapToComponent(eventList)}</div>
         <Table.Body>
+        {mapToComponent(eventList)}
         {_.map(Array(24), (val, timeIndex)=>(
                   <Table.Row >
                   {_.map(Array(7), (val2, dayIndex) =>{
