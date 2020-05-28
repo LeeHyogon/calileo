@@ -1,4 +1,6 @@
 import React from 'react';
+import moment from 'moment'
+
 import { Container,Button, Icon, Menu, Input, Dropdown } from 'semantic-ui-react'
 const friendOptions = [
   {
@@ -55,15 +57,19 @@ const Topblock = (props) => (
       <Menu.Menu position='center'>
         <Menu.Item>
           <Button.Group basic size='big' >
-            <Button icon='chevron left' />
-            <Button content='2020년 5월' />
-            <Button icon='chevron right' />
+            <Button icon='chevron left'  onClick = {()=>props.changePivotDay(moment(props.pivotDay).subtract(1, "w"))}/>
+            <Button content={moment(props.pivotDay).format("YYYY년 MM월")} />
+            <Button icon='chevron right' onClick = {()=>props.changePivotDay(moment(props.pivotDay).add(1, "w"))} />
           </Button.Group>
         </Menu.Item>
       </Menu.Menu>
       <Menu.Menu position='right'>
+        {/*Y M W D */}
         <Menu.Item>
-          <Selection />
+          <Selection 
+          //실행안됨
+          onChange={()=>props.changetimeUnit() }
+           />
         </Menu.Item>
         <Menu.Item>
           <Input icon='search' placeholder='Search task...' />

@@ -1,4 +1,6 @@
-import React from 'react'
+import React, { Component } from 'react'
+import moment from 'moment'
+import _ from "lodash"
 import { Grid, Menu, Table, Segment,Checkbox, Icon, Button } from 'semantic-ui-react'
 
 function Datetitle(props){
@@ -17,8 +19,10 @@ class MainCalendarBody extends Component{
   }
 
   render(){
+
     const {createNew,pivotDay, eventList ,eventCnt}=this.props;
     var index=this.props.eventCnt;
+
     var startTime=[];
     var endTime=[];
     //console.log(this.props);
