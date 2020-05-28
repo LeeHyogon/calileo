@@ -19,8 +19,10 @@ class MainCalendarBody extends Component{
   }
 
   render(){
-    const {createNew,pivotDay, eventList ,eventCnt}=this.props; 
-    var index=this.props.eventCnt; 
+
+    const {createNew,pivotDay, eventList ,eventCnt}=this.props;
+    var index=this.props.eventCnt;
+
     var startTime=[];
     var endTime=[];
     //console.log(this.props);

@@ -3,8 +3,9 @@ import moment from 'moment'
 import _ from "lodash"
 import MainCalendarBody from './MainCalendarBody'
 import SubCalendarBody from './SubCalendarBody'
+import CreateEvent from './CreateEvent'
 import { Grid, Input, Button } from 'semantic-ui-react'
-
+/*
 class CreateEvent extends Component{
   constructor(props) {
     super(props);
@@ -30,7 +31,7 @@ makeEvent = e => {
       </div>)
   }
 }
-
+*/
 class CalendarBody extends Component{
   constructor(props) {
     super(props);
@@ -60,8 +61,8 @@ enlistNew = (props) => {
           {_.map(this.state.eventList,(val)=> <p>{`${val.eventDetail} ${val.startTime}~${val.endTime}`} </p>)}
         </Grid.Column>
         <Grid.Column width={9}>
-        {this.state.isCreateNew ? <CreateEvent createNewTime = {this.state.createNewTime}
-        enlistNew = {this.enlistNew}/>: null}
+          {this.state.isCreateNew ? <CreateEvent createNewTime= {this.state.createNewTime}
+          enlistNew = {this.enlistNew}/>: null}
           <MainCalendarBody
             createNew = {this.createNew}
              pivotDay={this.props.pivotDay}
