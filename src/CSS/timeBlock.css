@@ -1,0 +1,9 @@
+:root {
+    --blockLength: 14px;
+    --mainColor: #ffc600;
+    --blur: 0px;
+}
+
+p {
+    height: var(--blockLength);
+}
