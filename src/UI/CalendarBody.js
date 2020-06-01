@@ -4,7 +4,7 @@ import _ from "lodash";
 import MainCalendarBody from "./MainCalendarBody";
 import SubCalendarBody from "./SubCalendarBody";
 import CreateEvent from "./CreateEvent";
-import somefunct from "../NLP/nlpMain"
+import nlpMain from "../NLP/nlpMain"
 
 import {
   Button,
@@ -39,7 +39,7 @@ class CreateStringEvent extends Component {
           }}
           value = {this.state.eventString}
         />
-        <Button primary onClick = {async () => {await somefunct()}}>등록</Button>{" "}
+        <Button primary onClick = {() => nlpMain(this.state.eventString)}>등록</Button>{" "}
       </div>
     );
   }
