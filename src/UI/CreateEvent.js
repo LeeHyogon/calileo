@@ -19,7 +19,7 @@ this.props.enlistNew({eventDetail :this.state.eventDetail, startTime : this.stat
 makeEvent = e => {
   this.setState({[e.target.name] : e.target.value})
 }
-  render(){  
+  render(){
     return(
     <Grid columns={2}>
     <Grid.Column>
@@ -28,7 +28,7 @@ makeEvent = e => {
           style={{
             left: '30%',
             position: 'fixed',
-            top: '50%',
+            top: '30%',
             zIndex: 10,
           }}
         >
