@@ -83,14 +83,13 @@ class CalendarBody extends Component {
   render() {
     return (
       <Grid>
-        <Grid.Column width={1} />
-        <Grid.Column width={5}>
+        <Grid.Column width={6}>
           <SubCalendarBody />
           {_.map(this.state.eventList, val => (
             <p>{`${val.eventDetail} ${val.startTime}~${val.endTime}`} </p>
           ))}
         </Grid.Column>
-        <Grid.Column width={9}>
+        <Grid.Column width={10}>
           {this.state.isCreateNew ? (
             <CreateEvent
               createNewTime={this.state.createNewTime}
