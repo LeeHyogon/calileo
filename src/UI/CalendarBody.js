@@ -49,7 +49,6 @@ class CalendarBody extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      eventCnt: 0,
       isCreateNew: false,
       isCreateNewString: false,
       createNewTime: "",
@@ -70,9 +69,7 @@ class CalendarBody extends Component {
 
 
   enlistNew = props => {
-    this.state.eventCnt += 1;
     this.setState({
-      eventCnt: this.state.eventCnt,
       eventList: _.concat(this.state.eventList, props),
       isCreateNew: false
     });
@@ -103,7 +100,6 @@ class CalendarBody extends Component {
             createNewString={this.createNewString}
             pivotDay={this.props.pivotDay}
             eventList={this.state.eventList}
-            eventCnt={this.state.eventCnt}
           />
         </Grid.Column>
       </Grid>
