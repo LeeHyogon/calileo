@@ -20,6 +20,7 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-moment": "^0.9.7",
+    "react-nlp": "0.0.3",
     "react-scripts": "3.4.1",
     "readline": "^1.3.0",
     "semantic-ui-calendar-react": "^0.15.3",
