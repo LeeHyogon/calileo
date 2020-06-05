@@ -1,32 +1,32 @@
 
 const { containerBootstrap } = require('@nlpjs/core');
 const { Nlp } = require('@nlpjs/nlp');
-const { LangEn } = require('@nlpjs/lang-en-min');
+const { LangKo } = require('@nlpjs/lang-ko');
 
 let nlpMain = async (eventString) => {
   const container = await containerBootstrap();
   container.use(Nlp);
-  container.use(LangEn);
+  container.use(LangKo);
   const nlp = container.get('nlp');
   nlp.settings.autoSave = false;
-  nlp.addLanguage('en');
+  nlp.addLanguage('ko');
   // Adds the utterances and intents for the NLP
-  nlp.addDocument('en', 'goodbye for now', 'greetings.bye');
-  nlp.addDocument('en', 'bye bye take care', 'greetings.bye');
-  nlp.addDocument('en', 'okay see you later', 'greetings.bye');
-  nlp.addDocument('en', 'bye for now', 'greetings.bye');
-  nlp.addDocument('en', 'i must go', 'greetings.bye');
-  nlp.addDocument('en', 'hello', 'greetings.hello');
-  nlp.addDocument('en', 'hi', 'greetings.hello');
-  nlp.addDocument('en', 'howdy', 'greetings.hello');
+  nlp.addDocument('ko', '잘 있어!', 'greetings.bye');
+  nlp.addDocument('ko', '빠이 바이', 'greetings.bye');
+  nlp.addDocument('ko', '다음에 또 보도록 하자', 'greetings.bye');
+  nlp.addDocument('ko', '조심히 들어가', 'greetings.bye');
+  nlp.addDocument('ko', '집에 갈 때가 되었어', 'greetings.bye');
+  nlp.addDocument('ko', '하이하이', 'greetings.hello');
+  nlp.addDocument('ko', '어 안녕', 'greetings.hello');
+  nlp.addDocument('ko', '잘 지냈어?', 'greetings.hello');
 
   // Train also the NLG
-  nlp.addAnswer('en', 'greetings.bye', 'Till next time');
-  nlp.addAnswer('en', 'greetings.bye', 'see you soon!');
-  nlp.addAnswer('en', 'greetings.hello', 'Hey there!');
-  nlp.addAnswer('en', 'greetings.hello', 'Greetings!');
+  nlp.addAnswer('ko', 'greetings.bye', '또 보자구');
+  nlp.addAnswer('ko', 'greetings.bye', '담에 봐');
+  nlp.addAnswer('ko', 'greetings.hello', '방가방가');
+  nlp.addAnswer('ko', 'greetings.hello', '안녕하세요');
   await nlp.train();
-  const response = await nlp.process('en', eventString);
+  const response = await nlp.process('ko', eventString);
   console.log(response)
   alert(response.answer);
 }
