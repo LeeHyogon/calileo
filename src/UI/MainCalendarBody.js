@@ -47,10 +47,7 @@ class MainCalendarBody extends Component {
   }
 
   render() {
-    const { createNew, pivotDay, eventList, eventCnt } = this.props;
-    var index = this.props.eventCnt;
-    var startTime = [];
-    var endTime = [];
+    const { createNew, pivotDay, eventList} = this.props;
     // startTime=_.map(eventList,'startTime');
     // endTime=_.map(eventList,'endTime');
     const mapToComponent = eventList => {
@@ -96,24 +93,12 @@ class MainCalendarBody extends Component {
                 let timeVal = moment(pivotDay)
                   .add(dayIndex, "d")
                   .add(timeIndex, "h");
-                // var i=0;
-                var ChkTime = false;
-                // while(i<index){
-                //    //let diff=moment.duration(moment(endTime[i],"YYYY-MM-DD").diff(moment(startTime[i],"YYYY-MM-DD"))).asDays();
-                //   if(timeVal.isBetween(moment(startTime[i]),moment(endTime[i]))
-                //   || timeVal.isSame(startTime[i])
-                //   || timeVal.isSame(endTime[i])
-                //   ){ ChkTime=true}
-                //   i+=1;
-                // }
                 return (
                   <Table.Cell
-                    style={{ backgroundColor: ChkTime ? "yellow" : "white" }}
                     selectable
                     verticalAlign="top"
                     onClick={() => createNew(timeVal)}
-                  >
-
+                  >                  
                     {timeVal.format("HH:mm")}
                   </Table.Cell>
                 );
@@ -121,9 +106,6 @@ class MainCalendarBody extends Component {
             </Table.Row>
           ))}
         </Table.Body>
-        {/* {JSON.stringify(this.props.eventList)} */}
-
-        {/* <Button height="1vh">연습용 버튼</Button> */}
       </Table>
       <button onClick = {()=>this.props.createNewString()}> String으로 일정 만들기 </button>
       </div>
