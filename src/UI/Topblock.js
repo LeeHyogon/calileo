@@ -1,7 +1,7 @@
 import React from 'react';
 import moment from 'moment'
 
-import { Container,Button, Icon, Menu, Input, Dropdown } from 'semantic-ui-react'
+import { Container,Button, Grid, Icon, Menu, Input, Dropdown } from 'semantic-ui-react'
 const friendOptions = [
   {
     key: 'Y',
@@ -37,36 +37,45 @@ const Selection = () => (
 const Topblock = (props) => (
   <div>
   <Container>
-    <Menu secondary>
-      <Menu.Menu position='left'>
-        <Menu.Item>
-          <Button basic>
-            <Button.Content>
-              <Icon name='list ul' />
-            </Button.Content>
-          </Button>
-        </Menu.Item>
-      </Menu.Menu>
-      <Menu.Item>
-      <Button basic>
-        <Button.Content>
-          <Icon name='save outline' />
-        </Button.Content>
-      </Button>
-      </Menu.Item>
-      <Menu.Menu position='center'>
-        <Menu.Item>
-          <Button.Group basic size='big' >
-            <Button icon='chevron left'  onClick = {()=>props.changePivotDay(moment(props.pivotDay).subtract(1, "w"))}/>
-            <Button content={moment(props.pivotDay).format("YYYY년 MM월")} />
-            <Button icon='chevron right' onClick = {()=>props.changePivotDay(moment(props.pivotDay).add(1, "w"))} />
-          </Button.Group>
-        </Menu.Item>
-      </Menu.Menu>
-      <Menu.Menu position='right'>
+  <Grid>
+    <Grid.Column computer={8} tablet={16} mobile={16}
+              floated='left'
+  >
+      <Menu secondary compact>
+        <Menu.Menu>
+          <Menu.Item>
+            <Button basic>
+              <Button.Content>
+                <Icon name='list ul' />
+              </Button.Content>
+            </Button>
+          </Menu.Item>
+
+          <Menu.Item>
+            <Button basic>
+              <Button.Content>
+                <Icon name='save outline' />
+              </Button.Content>
+            </Button>
+          </Menu.Item>
+          <Menu.Item>
+            <Button.Group basic size='big' >
+              <Button icon='chevron left'  onClick = {()=>props.changePivotDay(moment(props.pivotDay).subtract(1, "w"))}/>
+              <Button content={moment(props.pivotDay).format("YYYY년 MM월")} />
+              <Button icon='chevron right' onClick = {()=>props.changePivotDay(moment(props.pivotDay).add(1, "w"))} />
+            </Button.Group>
+          </Menu.Item>
+        </Menu.Menu>
+      </Menu>
+    </Grid.Column>
+  <Grid.Column computer={8} tablet={16} mobile={16}
+              floated='right'
+  >
+    <Menu secondary compact>
+      <Menu.Menu>
         {/*Y M W D */}
         <Menu.Item>
-          <Selection 
+          <Selection
           //실행안됨
           onChange={()=>props.changetimeUnit() }
            />
@@ -83,6 +92,8 @@ const Topblock = (props) => (
         </Menu.Item>
       </Menu.Menu>
     </Menu>
+  </Grid.Column>
+  </Grid>
   </Container>
   </div>
 )

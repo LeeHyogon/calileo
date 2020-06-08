@@ -79,14 +79,17 @@ class CalendarBody extends Component {
   };
   render() {
     return (
-      <Grid>
-        <Grid.Column width={6}>
+      <Grid column='equal'>
+        <Grid.Column computer={6} tablet={16} mobile={16}
+                    floated='left'
+        >
           <SubCalendarBody />
           {_.map(this.state.eventList, val => (
             <p>{`${val.eventDetail} ${val.startTime}~${val.endTime}`} </p>
           ))}
         </Grid.Column>
-        <Grid.Column width={10}>
+        <Grid.Column computer={10} tablet={16} mobile={16}
+        floated='right'>
           {this.state.isCreateNew ? (
             <CreateEvent
               createNewTime={this.state.createNewTime}

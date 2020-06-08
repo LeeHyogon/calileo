@@ -25,11 +25,11 @@ const StyledButton = styled.button`
   font-size: 1rem;
   line-height: 1.5;
   border: 1px solid lightgray;
-  height: ${props => props.height || '21px'};
+  height: ${props => props.height || '3vh'};
   position: absolute;
-  left: ${props => props.left || '14px' };
-  top: ${props => props.top || '10px'};
-  width: 111px;
+  left: ${props => props.left || '1vw' };
+  top: ${props => props.top || '10vh'};
+  width: 19.3vh;
 `;
 
 function Button({ children, height, left, top }) {
@@ -65,9 +65,9 @@ class MainCalendarBody extends Component {
                 )
               )
               .asDays();
-            let top = 20.7*moment(startTime[i]).hour()+60+'px';
-            let left = 111.2*moment(startTime[i]).day()+14+'px';
-            let height= 20.7*moment.duration(moment(endTime[i]).diff(moment(startTime[i]))).asHours()+'px';
+            let top = 3.9*moment(startTime[i]).hour()+10.3+'vh';
+            let left = 8.69*moment(startTime[i]).day()+1.1+'vw';
+            let height= 3.9*moment.duration(moment(endTime[i]).diff(moment(startTime[i]))).asHours()+'vh';
             let content = eventDetail[i];
             //console.log(top + " " + left + " ");
             return (
@@ -83,7 +83,7 @@ class MainCalendarBody extends Component {
     };
     return (
       <div>
-      <Table celled>
+      <Table celled fixed>
         {Datetitle(pivotDay)}
         <Table.Body>
           {mapToComponent(eventList)}
@@ -98,8 +98,7 @@ class MainCalendarBody extends Component {
                     selectable
                     verticalAlign="top"
                     onClick={() => createNew(timeVal)}
-                  >
-                   
+                  >                  
                     {timeVal.format("HH:mm")}
                   </Table.Cell>
                 );
