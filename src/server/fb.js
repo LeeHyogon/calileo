@@ -1,5 +1,6 @@
 import * as firebase from "firebase"
 
+
 const firebaseConfig = {
   apiKey: "AIzaSyD1M7hCwmiH_jHmM4qPFpCUp7zV--JwZQ8",
   authDomain: "calileo.firebaseapp.com",
@@ -11,9 +12,10 @@ const firebaseConfig = {
   measurementId: "G-BWKVM6P4LK"
 };
 
-firebase.initializeApp(firebaseConfig);
+const firebaseApp=firebase.initializeApp(firebaseConfig);
 
 const auth = firebase.auth()
 const googleProvider =  new firebase.auth.GoogleAuthProvider();
 
 export {googleProvider, auth}
+export default firebaseApp.firestore()

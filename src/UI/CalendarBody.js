@@ -5,6 +5,7 @@ import MainCalendarBody from "./MainCalendarBody";
 import SubCalendarBody from "./SubCalendarBody";
 import CreateEvent from "./CreateEvent";
 import nlpMain from "../NLP/nlpMain"
+import db from "../server/fb"
 
 import {
   Button,
@@ -69,6 +70,19 @@ class CalendarBody extends Component {
 
 
   enlistNew = props => {
+    //파이어스토어 데이터 생성 구문. 제거 금지!!!!!
+    // const { endTime,eventDetail,startTime} = props;
+    // db.collection("users").add({
+    //   endTime : endTime,
+    //   eventDetail: eventDetail,
+    //   startTime: startTime 
+    //   })
+    //   .then(function(docRef) {
+    //       console.log("Document written with ID: ", docRef.id);
+    //   })
+    //   .catch(function(error) {
+    //       console.error("Error adding document: ", error);
+    //   });
     this.setState({
       eventList: _.concat(this.state.eventList, props),
       isCreateNew: false
