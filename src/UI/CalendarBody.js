@@ -5,6 +5,7 @@ import MainCalendarBody from "./MainCalendarBody";
 import SubCalendarBody from "./SubCalendarBody";
 import CreateEvent from "./CreateEvent";
 import nlpMain from "../NLP/nlpMain"
+import db from "../server/fb"
 
 import {
   Button,
@@ -74,7 +75,7 @@ class CalendarBody extends Component {
     // db.collection("users").add({
     //   endTime : endTime,
     //   eventDetail: eventDetail,
-    //   startTime: startTime
+
     //   })
     //   .then(function(docRef) {
     //       console.log("Document written with ID: ", docRef.id);

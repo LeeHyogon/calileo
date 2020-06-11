@@ -3,6 +3,7 @@ import moment from "moment";
 import _ from "lodash";
 import { Grid, Menu, Table, Segment, Checkbox, Icon } from "semantic-ui-react";
 import styled from "styled-components";
+import db from "../server/fb"
 
 function Datetitle(props) {
   return (
@@ -51,7 +52,9 @@ class MainCalendarBody extends Component {
     // startTime=_.map(eventList,'startTime');
     // endTime=_.map(eventList,'endTime');
     const mapToComponent = eventList => {
+
 /*
+
       db.collection("cities").get().then(function(querySnapshot) {
         querySnapshot.forEach(function(doc) {
             console.log(doc.id, " => ", doc.data());
@@ -59,11 +62,13 @@ class MainCalendarBody extends Component {
         //     let endTime=doc.data().endTime;
         //     let eventDetail=doc.data().eventDetail;
         });
+
     });
     */
       var startTime=[];
       var endTime=[];
       var eventDetail=[];
+
 
       startTime = _.map(eventList, "startTime");
       endTime = _.map(eventList, "endTime");
@@ -105,7 +110,9 @@ class MainCalendarBody extends Component {
                   .add(dayIndex, "d")
                   .add(timeIndex, "h");
                 return (
+
                   //StartTime을 기준으로 Table Cell에 버튼을 만든다.
+
                   <Table.Cell
                     selectable
                     verticalAlign="top"
