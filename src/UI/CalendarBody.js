@@ -69,6 +69,19 @@ class CalendarBody extends Component {
 
 
   enlistNew = props => {
+    //파이어스토어 데이터 생성 구문. 제거 금지!!!!!
+    // const { endTime,eventDetail,startTime} = props;
+    // db.collection("users").add({
+    //   endTime : endTime,
+    //   eventDetail: eventDetail,
+    //   startTime: startTime
+    //   })
+    //   .then(function(docRef) {
+    //       console.log("Document written with ID: ", docRef.id);
+    //   })
+    //   .catch(function(error) {
+    //       console.error("Error adding document: ", error);
+    //   });
     this.setState({
       eventList: _.concat(this.state.eventList, props),
       isCreateNew: false
@@ -103,6 +116,7 @@ class CalendarBody extends Component {
             createNewString={this.createNewString}
             pivotDay={this.props.pivotDay}
             eventList={this.state.eventList}
+            timeUnit={this.props.timeUnit}//main.js에서 받아와서 이거에 따라 maincalendar가 다르게 보여지도록 구현할 예정입니다.
           />
         </Grid.Column>
       </Grid>
