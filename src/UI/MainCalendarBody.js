@@ -49,27 +49,21 @@ class MainCalendarBody extends Component {
 
   render() {
     const { createNew, pivotDay, eventList} = this.props;
-    // startTime=_.map(eventList,'startTime');
-    // endTime=_.map(eventList,'endTime');
-    const mapToComponent = eventList => {
-
-/*
-
-      db.collection("cities").get().then(function(querySnapshot) {
-        querySnapshot.forEach(function(doc) {
-            console.log(doc.id, " => ", doc.data());
-        //     let startTIme=doc.data().startTIme;
-        //     let endTime=doc.data().endTime;
-        //     let eventDetail=doc.data().eventDetail;
+    var startTime=[];
+    var endTime=[];
+    var eventDetail=[];
+    var index=0;
+    const inputFirestore= e => {
+      db.collection("users").get().then(function(querySnapshot) {
+      querySnapshot.forEach(function(doc) {
+           startTime[index]=doc.data().startTime;
+           endTime[index]=doc.data().endTime;
+           eventDetail[index]=doc.data().eventDetail;
+           index+=1;
         });
-
-    });
-    */
-      var startTime=[];
-      var endTime=[];
-      var eventDetail=[];
-
-
+      });
+    };
+    const mapToComponent = eventList => {
       startTime = _.map(eventList, "startTime");
       endTime = _.map(eventList, "endTime");
       eventDetail = _.map(eventList, "eventDetail");//블럭에 일정 내용 들어가도록
@@ -95,14 +89,14 @@ class MainCalendarBody extends Component {
               </Button>
         );
       });
+      
     };
-
     return (
-      <div>
+      <div>  
       <Table celled fixed>
         {Datetitle(pivotDay)}
         <Table.Body>
-          {mapToComponent(eventList)}
+          {inputFirestore()}          
           {_.map(Array(24), (val, timeIndex) => (
             <Table.Row>
               {_.map(Array(7), (val2, dayIndex) => {
@@ -110,15 +104,14 @@ class MainCalendarBody extends Component {
                   .add(dayIndex, "d")
                   .add(timeIndex, "h");
                 return (
-
                   //StartTime을 기준으로 Table Cell에 버튼을 만든다.
-
                   <Table.Cell
                     selectable
                     verticalAlign="top"
                     onClick={() => createNew(timeVal)}
                   >
                     {timeVal.format("HH:mm")}
+                    
                   </Table.Cell>
                 );
               })}
