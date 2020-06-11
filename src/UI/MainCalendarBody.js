@@ -52,7 +52,9 @@ class MainCalendarBody extends Component {
     // startTime=_.map(eventList,'startTime');
     // endTime=_.map(eventList,'endTime');
     const mapToComponent = eventList => {
-     
+
+/*
+
       db.collection("cities").get().then(function(querySnapshot) {
         querySnapshot.forEach(function(doc) {
             console.log(doc.id, " => ", doc.data());
@@ -60,11 +62,14 @@ class MainCalendarBody extends Component {
         //     let endTime=doc.data().endTime;
         //     let eventDetail=doc.data().eventDetail;
         });
-    });    
+
+    });
+    */
       var startTime=[];
       var endTime=[];
       var eventDetail=[];
-    
+
+
       startTime = _.map(eventList, "startTime");
       endTime = _.map(eventList, "endTime");
       eventDetail = _.map(eventList, "eventDetail");//블럭에 일정 내용 들어가도록
@@ -91,6 +96,7 @@ class MainCalendarBody extends Component {
         );
       });
     };
+
     return (
       <div>
       <Table celled fixed>
@@ -104,12 +110,14 @@ class MainCalendarBody extends Component {
                   .add(dayIndex, "d")
                   .add(timeIndex, "h");
                 return (
-                  //StartTime을 기준으로 Table Cell에 버튼을 만든다. 
+
+                  //StartTime을 기준으로 Table Cell에 버튼을 만든다.
+
                   <Table.Cell
                     selectable
                     verticalAlign="top"
                     onClick={() => createNew(timeVal)}
-                  >                  
+                  >
                     {timeVal.format("HH:mm")}
                   </Table.Cell>
                 );
