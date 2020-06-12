@@ -1,0 +1,70 @@
+{
+  "Document": [
+    {
+      "lang": "ko",
+      "inputString": "잘 있어!",
+      "group": "greetings.bye"
+    },
+    {
+      "lang": "ko",
+      "inputString": "빠빠이",
+      "group": "greetings.bye"
+    },
+    {
+      "lang": "ko",
+      "inputString": "안녕히 계십시오",
+      "group": "greetings.bye"
+    },
+    {
+      "lang": "ko",
+      "inputString": "조심히 들어가",
+      "group": "greetings.bye"
+    },
+    {
+      "lang": "ko",
+      "inputString": "집에 갈 때다",
+      "group": "greetings.bye"
+    },
+    {
+      "lang": "ko",
+      "inputString": "하이하이",
+      "group": "greetings.hello"
+    },
+    {
+      "lang": "ko",
+      "inputString": "어 안녕",
+      "group": "greetings.hello"
+    },
+    {
+      "lang": "ko",
+      "inputString": "잘 지냈어?",
+      "group": "greetings.hello"
+    },
+    {
+      "lang": "ko",
+      "inputString": "오랜만~!",
+      "group": "greetings.hello"
+    }
+  ],
+  "Answer": [
+  {
+    "lang": "ko",
+    "outputString": "방가방가",
+    "group": "greetings.hello"
+  },
+  {
+    "lang": "ko",
+    "outputString": "안녕하세요?",
+    "group": "greetings.hello"
+  },
+  {
+    "lang": "ko",
+    "outputString": "또 보자구",
+    "group": "greetings.bye"
+  },
+  {
+    "lang": "ko",
+    "outputString": "담에봐",
+    "group": "greetings.bye"
+  }]
+}
