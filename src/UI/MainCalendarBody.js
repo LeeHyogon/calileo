@@ -95,36 +95,34 @@ class MainCalendarBody extends Component {
       });
     };
     return (
-      <div>
-        <Table celled fixed>
-          {Datetitle(pivotDay)}
-          <Table.Body>
-            {inputFirestore()}
-            {_.map(Array(24), (val, timeIndex) => (
-              <Table.Row>
-                {_.map(Array(7), (val2, dayIndex) => {
-                  let timeVal = moment(pivotDay)
-                    .add(dayIndex, "d")
-                    .add(timeIndex, "h");
-                  return (
-                    //StartTime을 기준으로 Table Cell에 버튼을 만든다.
-                    <Table.Cell
-                      selectable
-                      verticalAlign="top"
-                      onClick={() => createNew(timeVal)}
-                    >
-                      {timeVal.format("HH:mm")}
-                    </Table.Cell>
-                  );
-                })}
-              </Table.Row>
-            ))}
-          </Table.Body>
-        </Table>
-        <button onClick={() => this.props.createNewString()}>
-          {" "}
-          String으로 일정 만들기{" "}
-        </button>
+      <div>  
+      <Table celled fixed>
+        {Datetitle(pivotDay)}
+        <Table.Body>
+          {inputFirestore()}          
+          {_.map(Array(24), (val, timeIndex) => (
+            <Table.Row>
+              {_.map(Array(7), (val2, dayIndex) => {
+                let timeVal = moment(pivotDay)
+                  .add(dayIndex, "d")
+                  .add(timeIndex, "h");
+                return (
+                  //StartTime을 기준으로 Table Cell에 버튼을 만든다.
+                  <Table.Cell
+                    selectable
+                    verticalAlign="top"
+                    onClick={() => createNew(timeVal)}
+                  >
+                    {timeVal.format("HH:mm")} 
+                  </Table.Cell>
+                );
+              })}
+            </Table.Row>
+          ))}
+        </Table.Body>
+      </Table>
+      <button onClick = {()=>this.props.createNewString()}> String으로 일정 만들기 </button>
+
       </div>
     );
   }
