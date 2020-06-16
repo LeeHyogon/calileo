@@ -89,7 +89,6 @@ class MainCalendarBody extends Component {
               </Button>
         );
       });
-      
     };
     return (
       <div>  
@@ -110,8 +109,7 @@ class MainCalendarBody extends Component {
                     verticalAlign="top"
                     onClick={() => createNew(timeVal)}
                   >
-                    {timeVal.format("HH:mm")}
-                    
+                    {timeVal.format("HH:mm")} 
                   </Table.Cell>
                 );
               })}

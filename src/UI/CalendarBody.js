@@ -68,7 +68,6 @@ class CalendarBody extends Component {
     this.setState({ isCreateNewString: true });
   };
 
-
   enlistNew = props => {
     //파이어스토어 데이터 생성 구문. 제거 금지!!!!!
     // const { endTime,eventDetail,startTime} = props;
