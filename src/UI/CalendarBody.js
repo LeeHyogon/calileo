@@ -4,8 +4,8 @@ import _ from "lodash";
 import MainCalendarBody from "./MainCalendarBody";
 import SubCalendarBody from "./SubCalendarBody";
 import CreateEvent from "./CreateEvent";
-import nlpMain from "../NLP/nlpMain"
-import db from "../server/fb"
+import {trainedNlp, nlpMain} from "../NLP/nlpMain";
+import db from "../server/fb";
 
 import {
   Button,
@@ -38,9 +38,21 @@ class CreateStringEvent extends Component {
           onChange={e => {
             this.makeEvent(e);
           }}
-          value = {this.state.eventString}
+          onKeyPress={e => {
+            if (e.key === "Enter") {
+              trainedNlp.then(res => {
+                nlpMain(res, this.state.eventString)
+              });
+            }
+          }}
+          value={this.state.eventString}
         />
-        <Button primary onClick = {() => nlpMain(this.state.eventString)}>등록</Button>{" "}
+        <Button primary onClick={() =>
+          trainedNlp.then(res => {
+            nlpMain(res, this.state.eventString)
+          })}>
+          등록
+        </Button>{" "}
       </div>
     );
   }
@@ -92,17 +104,14 @@ class CalendarBody extends Component {
   };
   render() {
     return (
-      <Grid column='equal'>
-        <Grid.Column computer={6} tablet={16} mobile={16}
-                    floated='left'
-        >
+      <Grid column="equal">
+        <Grid.Column computer={6} tablet={16} mobile={16} floated="left">
           <SubCalendarBody />
           {_.map(this.state.eventList, val => (
             <p>{`${val.eventDetail} ${val.startTime}~${val.endTime}`} </p>
           ))}
         </Grid.Column>
-        <Grid.Column computer={10} tablet={16} mobile={16}
-        floated='right'>
+        <Grid.Column computer={10} tablet={16} mobile={16} floated="right">
           {this.state.isCreateNew ? (
             <CreateEvent
               createNewTime={this.state.createNewTime}
@@ -116,7 +125,7 @@ class CalendarBody extends Component {
             createNewString={this.createNewString}
             pivotDay={this.props.pivotDay}
             eventList={this.state.eventList}
-            timeUnit={this.props.timeUnit}//main.js에서 받아와서 이거에 따라 maincalendar가 다르게 보여지도록 구현할 예정입니다.
+            timeUnit={this.props.timeUnit} //main.js에서 받아와서 이거에 따라 maincalendar가 다르게 보여지도록 구현할 예정입니다.
           />
         </Grid.Column>
       </Grid>
