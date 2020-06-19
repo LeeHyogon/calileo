@@ -2,69 +2,89 @@
   "Document": [
     {
       "lang": "ko",
-      "inputString": "잘 있어!",
-      "group": "greetings.bye"
+      "inputString": "내일 3시 홍문관 앞에서 콜?",
+      "group": "Appointment.sentence"
     },
     {
       "lang": "ko",
-      "inputString": "빠빠이",
-      "group": "greetings.bye"
+      "inputString": "6/20 8시",
+      "group": "Appointment.short "
     },
     {
       "lang": "ko",
-      "inputString": "안녕히 계십시오",
-      "group": "greetings.bye"
+      "inputString": "그럼 김 군과 함께 목요일 아침에 뵙겠습니다.",
+      "group": "Appointment.sentence"
     },
     {
       "lang": "ko",
-      "inputString": "조심히 들어가",
-      "group": "greetings.bye"
+      "inputString": "차주 23시로 컨펌하죠",
+      "group": "Appointment.sentence"
     },
     {
       "lang": "ko",
-      "inputString": "집에 갈 때다",
-      "group": "greetings.bye"
+      "inputString": "오늘 자정에 상수역에서 보자",
+      "group": "Appointment.sentence"
     },
     {
       "lang": "ko",
-      "inputString": "하이하이",
-      "group": "greetings.hello"
+      "inputString": "3시 반",
+      "group": "Appointment.short"
     },
     {
       "lang": "ko",
-      "inputString": "어 안녕",
-      "group": "greetings.hello"
+      "inputString": "다음 주 금요일에 발표가 있어",
+      "group": "Appointment.schedule"
     },
     {
       "lang": "ko",
-      "inputString": "잘 지냈어?",
-      "group": "greetings.hello"
+      "inputString": "그때로 ㄱㄱ",
+      "group": "Appointment.short"
     },
     {
       "lang": "ko",
-      "inputString": "오랜만~!",
-      "group": "greetings.hello"
+      "inputString": "그러면 내일 오후로 하지",
+      "group": "Appointment.sentence"
+    },
+    {
+      "lang": "ko",
+      "inputString": "내일 지난 번에 갔던 곳에 또 가자",
+      "group": "Appointment.sentence"
+    },
+    {
+      "lang": "ko",
+      "inputString": "방학 때 제주도에 가자",
+      "group": "Appointment.sentence"
+    },
+    {
+      "lang": "ko",
+      "inputString": "종강 날에 맥도날드에서 회식이 있을 예정이야",
+      "group": "Appointment.sentence"
+    },
+    {
+      "lang": "ko",
+      "inputString": "오늘(6/19) 자정까지 연락 바랍니다",
+      "group": "Appointment.sentence"
+    },
+    {
+      "lang": "ko",
+      "inputString": "이따 6시에 저기서 다시 만나",
+      "group": "Appointment.sentence"
+    },
+    {
+      "lang": "ko",
+      "inputString": "17시 홍문관 810호 ",
+      "group": "Appointment.short"
     }
   ],
   "Answer": [
   {
     "lang": "ko",
-    "outputString": "방가방가",
-    "group": "greetings.hello"
+    "outputString": "일정 문장",
+    "group": "Appointment.sentence"
   },
   {
     "lang": "ko",
-    "outputString": "안녕하세요?",
-    "group": "greetings.hello"
-  },
-  {
-    "lang": "ko",
-    "outputString": "또 보자구",
-    "group": "greetings.bye"
-  },
-  {
-    "lang": "ko",
-    "outputString": "담에봐",
-    "group": "greetings.bye"
+    "outputString": "일정 요약",
+    "group": "Appointment.short"
   }]
 }
