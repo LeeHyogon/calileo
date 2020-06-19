@@ -84,9 +84,9 @@ class CalendarBody extends Component {
     //파이어스토어 데이터 생성 구문. 제거 금지!!!!!
     // const { endTime,eventDetail,startTime} = props;
     // db.collection("users").add({
+    //   startTime: startTime,
     //   endTime : endTime,
     //   eventDetail: eventDetail,
-
     //   })
     //   .then(function(docRef) {
     //       console.log("Document written with ID: ", docRef.id);

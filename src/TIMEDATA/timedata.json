@@ -1,0 +1,14 @@
+{
+    "users": [
+        {
+            "startTime": "2020.06.19 15:00",
+            "endTime": "2020.06.19 16:00",
+            "eventDetail":"json test1" 
+        },
+        {
+            "startTime": "2020.06.18 15:00",
+            "endTime": "2020.06.18 16:00",
+            "eventDetail":"json test2" 
+        }
+    ]
+}
