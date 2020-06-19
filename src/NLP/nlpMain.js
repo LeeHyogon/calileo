@@ -1,5 +1,8 @@
 import corpusCalileo from "./corpusCalileo";
+import stringDivider from './stringDivider.js'
+// import executor from './stringDivider.js'
 import _ from "lodash";
+
 
 const { containerBootstrap } = require("@nlpjs/core");
 const { Nlp } = require("@nlpjs/nlp");
@@ -28,11 +31,24 @@ let nlpTrain = async (NLP, corpus) => {
   return NLP;
 };
 
+let nlpProcess = () => {};
+
 export let nlpMain = async (NLP, eventString) => {
   const response = await NLP.process("ko", eventString);
   console.log(response);
-  alert(response.answer);
+  if (response.answer == "일정 문장") {
+    stringDivider(eventString);
+    // executor().then(
+    //     () => console.log('finished!'),
+    //     (error) => console.error('Error Occurred!', error)
+    // );
+
+  }
+  else if (response.answer == "일정 요약") {
+    alert("요약" + eventString);
+  }
 };
+
 export const trainedNlp = nlpConfig().then(res => nlpTrain(res, corpusCalileo));
 // .then(res => {
 // console.log(res);
