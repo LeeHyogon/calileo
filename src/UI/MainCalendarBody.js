@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import moment from "moment";
 import _ from "lodash";
-import { Grid, Menu, Table, Segment, Checkbox, Icon } from "semantic-ui-react";
+import { Grid, Menu, Table, Segment, Checkbox, Icon} from "semantic-ui-react";
 import styled from "styled-components";
 import db from "../server/fb";
 import timedata from "../TIMEDATA/timedata.json"
@@ -19,25 +19,53 @@ function Datetitle(props) {
     </Table.Header>
   );
 }
-
+const style = {
+  height: '60px',
+  verticalAlign: 'middle',
+  //textAlign:  'center',
+  //lineHeight: '60px'
+}
 const StyledButton = styled.button`
-  z-index: 1;
+  z-index: 3;
   padding: 0.375rem 0.75rem;
   border-radius: 0.25rem;
   font-size: 1rem;
   line-height: 1.5;
   border: 1px solid lightgray;
-  height: ${props => props.height || "3vh"};
-  position: static;
-  left: ${props => props.left || "1vw"};
-  top: ${props => props.top || "10vh"};
-  width: 19.3vh;
+  height: ${props => props.height };
+  position: absolute;
+  left: ${props => props.left };
+  top: ${props => props.top };
+  width : ${props => props.top || '19vh'};
 `;
 
-function Button({ children, height, left, top }) {
+
+// class ChildList extends Component  {
+//   constructor(props) {
+//     super(props);
+//     this.state = {};
+//   }
+
+//   render() {
+//     const {isChild}=this.props;
+//     console.log(isChild);
+//     const listItems=isChild.map((number)=>
+//   <button> {isChild[number].eventDetail}</button>
+//     );
+//     return (
+//       <div>
+//         {listItems}
+//       </div>
+//     )
+//   }
+// }
+
+function Button({ content, height, left ,index,createNewSubCal,viewChild,isChild}) {
   return (
-    <StyledButton height={height} left={left} top={top}>
-      {children}
+    <StyledButton  onClick={()=>createNewSubCal(index)}
+      height={height} left={left}
+    >
+      {content} 
     </StyledButton>
   );
 }
@@ -51,15 +79,17 @@ class MainCalendarBody extends Component {
   }
 
   render() {
-    const { createNew, pivotDay} = this.props;
+    const { createNew,createNewSubCal,pivotDay} = this.props;
     var index = 0;
     var startTime=[];
     var endTime=[];
     var eventDetail=[];
+    var isChild;
+    var viewChild=_.map(timedata.users,'viewChild');
     startTime=_.map(timedata.users,'startTime');
     endTime=_.map(timedata.users,'endTime');
     eventDetail=_.map(timedata.users,'eventDetail');
-
+    isChild=_.map(timedata.users,'isChild');
     const inputFirestore = e => {
       db.collection("users")
         .get()
@@ -106,7 +136,6 @@ class MainCalendarBody extends Component {
       <Table celled fixed>
         {Datetitle(pivotDay)}
         <Table.Body>
-          {/* {inputFirestore()}           */}
           {_.map(Array(24), (val, timeIndex) => (
             <Table.Row>
               {_.map(Array(7), (val2, dayIndex) => {
@@ -114,35 +143,52 @@ class MainCalendarBody extends Component {
                   .add(dayIndex, "d")
                   .add(timeIndex, "h");
                   var ChkTime = false;
+                  var ChkTime2 = false;
                   var i=0;
-                  var top,left,height,content;
+                  var height,width,content;
+                  var eventData = [];
+                  var index;
                   startTime.map((v,i) => {
                     if(timeVal.isBetween(moment(startTime[i]),moment(endTime[i]))
-                     || timeVal.isSame(startTime[i])
-                     ){ChkTime=true;
+                    || timeVal.isSame(startTime[i])
+                    ){ChkTime=true;
+                    }
+                    if(timeVal.isSame(startTime[i])
+                      ){ChkTime2=true;
                       content = eventDetail[i];
+                      height = 61 * moment
+                      .duration(moment(endTime[i])
+                      .diff(moment(startTime[i])))
+                      .asHours() + "px";
+                      width = 19.1 + 19.3 * moment
+                      .duration(moment(endTime[i])
+                      .diff(moment(startTime[i])))
+                      .asDays() + 'vh';
+                      index=i;
                     }
                   });
-          
+
                 return (
                   //StartTime을 기준으로 Table Cell에 버튼을 만든다.
                   <Table.Cell
                     selectable
                     verticalAlign="top"
-                    onClick={() => createNew(timeVal)}
+                    onClick={ChkTime ? null : () => createNew(timeVal)}
                   >
-                    {ChkTime ?   <Button >
-                                 {content}
-                                  </Button> 
+                    <div style={style}>
+                    {/* {viewChild ? <ChildList isChild={isChild[index]}></ChildList> : null} */}
+                    {ChkTime2 ?   <Button content={content} height={height}
+                                    createNewSubCal={()=>createNewSubCal(index)} 
+                                  >
+                                  </Button>
                                   : timeVal.format("HH:mm")}
-                    
-
+                    </div>
                   </Table.Cell>
                 );
               })}
             </Table.Row>
           ))}
-        </Table.Body>
+          </Table.Body>
       </Table>
       <button onClick = {()=>this.props.createNewString()}> String으로 일정 만들기 </button>
 

@@ -1,0 +1,28 @@
+{
+    "users": [
+        {
+            "startTime": "2020.06.26 14:00",
+            "endTime": "2020.06.26 18:00",
+            "eventDetail":"json test1" ,
+            "isChild": [
+                {
+                    "startTime": "2020.06.26 15:00",
+                    "endTime": "2020.06.26 16:00",
+                    "eventDetail":"json test1-1" 
+                },
+                {
+                    "startTime": "2020.06.26 16:00",
+                    "endTime": "2020.06.26 17:00",
+                    "eventDetail":"json test1-2" 
+                }
+            ]
+            
+        },
+        {
+            "startTime": "2020.06.27 15:00",
+            "endTime": "2020.06.27 16:00",
+            "eventDetail":"json test2",
+            "isChild":[]
+        }
+    ]
+}

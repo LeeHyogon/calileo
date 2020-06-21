@@ -1,14 +1,30 @@
 {
     "users": [
         {
-            "startTime": "2020.06.19 15:00",
-            "endTime": "2020.06.19 16:00",
-            "eventDetail":"json test1" 
+            "startTime": "2020.06.26 01:00",
+            "endTime": "2020.06.26 05:00",
+            "eventDetail":"json test1" ,
+            "viewChild": true,
+            "isChild": [
+                {
+                    "startTime": "2020.06.26 02:00",
+                    "endTime": "2020.06.26 03:00",
+                    "eventDetail":"json test1-1" 
+                },
+                {
+                    "startTime": "2020.06.26 03:00",
+                    "endTime": "2020.06.26 04:00",
+                    "eventDetail":"json test1-2" 
+                }
+            ]
+            
         },
         {
-            "startTime": "2020.06.18 15:00",
-            "endTime": "2020.06.18 16:00",
-            "eventDetail":"json test2" 
+            "startTime": "2020.06.27 01:00",
+            "endTime": "2020.06.27 04:00",
+            "eventDetail":"json test2",
+            "viewChild": false,
+            "isChild":[]
         }
     ]
 }

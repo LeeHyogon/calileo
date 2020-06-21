@@ -1,12 +1,67 @@
-import React from 'react'
+import React, {Component} from 'react'
 import { Grid, Menu, Table, Segment,Checkbox, Icon, Button } from 'semantic-ui-react'
+import _ from "lodash"
+import moment from "moment";
+import timedata from "../TIMEDATA/timedata.json"
 
-const SubCalendarBody = () =>(
-  <Segment>
-    <p>task</p>
-    <Menu fluid vertical>
-    </Menu>
-  </Segment>
-)
+class SubCalendarBody extends Component{
+  constructor(props){
+    super(props);
+    this.state = {
+      subCalendarIndex :this.props.subCalendarIndex,
+      checked: this.props.viewChild,
+    };
+  }
+
+  handleChange = (e) => {
+    const { target: { checked } } = e;
+    this.setState({ checked });
+    var Chk=checked;
+    // console.log(this.props.subCalendarIndex);
+    // console.log(timedata.users[this.props.subCalendarIndex]);
+    timedata.users[this.props.subCalendarIndex].viewChild=checked;
+  };
+  render(){
+    const {subCalendarIndex} = this.props;
+    // this.setState({subCalendarIndex: this.props.subCalendarIndex});
+    var startTime=[];
+    var endTime=[];
+    var eventDetail=[];
+    var isChild,viewChild;
+    startTime=_.map(timedata.users,'startTime');
+    endTime=_.map(timedata.users,'endTime');
+    eventDetail=_.map(timedata.users,'eventDetail');
+    isChild=_.map(timedata.users,'isChild');
+    viewChild=_.map(timedata.users,'viewChild');
+    return(
+      <Segment>
+        <div>
+          { <p>{`${eventDetail[subCalendarIndex]}`} </p>}
+          <button onClick={()=>this.props.createSubNew(moment(startTime[subCalendarIndex]))}>세부일정 생성</button>
+          <br></br>
+          <p>세부일정 보기 
+            <input
+            name="isGoing"
+            type="checkbox"
+            checked={this.state.checked}
+            onChange={this.handleChange}/></p>
+          
+        </div>
+        <Menu fluid vertical>
+          <Menu.Item onClick>
+            {
+            _.map(isChild[subCalendarIndex], val => (
+              <p>Start time : {` ${val.startTime} `} <br></br>
+              End time : {` ${val.endTime} `} <br></br>
+              eventDetail: {` ${val.eventDetail} `}
+              </p>
+            ))}
+            
+          </Menu.Item>
+        </Menu>
+      </Segment>
+    )
+  }
+}
 
 export default SubCalendarBody
