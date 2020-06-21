@@ -6,7 +6,8 @@ import SubCalendarBody from "./SubCalendarBody";
 import CreateEvent from "./CreateEvent";
 import {trainedNlp, nlpMain} from "../NLP/nlpMain";
 import db from "../server/fb";
-
+import timedata from "../TIMEDATA/timedata.json"
+import * as fs from 'fs';
 import {
   Button,
   Grid,
@@ -65,7 +66,8 @@ class CalendarBody extends Component {
       isCreateNew: false,
       isCreateNewString: false,
       createNewTime: "",
-      eventList: []
+      eventList: [],
+      subCalendarIndex: -1,
     };
   }
 
@@ -74,6 +76,13 @@ class CalendarBody extends Component {
       isCreateNew: true,
       createNewTime: props.format("YYYY.MM.DD HH:mm")
     });
+  };
+  createNewSubCal = props => {
+    this.setState({ subCalendarIndex: props});
+    // if(this.state.subCalendarIndex>=0){
+    //   console.log(timedata.users[this.state.subCalendarIndex]);
+    // }
+    
   };
 
   createNewString = props => {
@@ -94,7 +103,21 @@ class CalendarBody extends Component {
     //   .catch(function(error) {
     //       console.error("Error adding document: ", error);
     //   });
-    this.setState({
+    const { endTime,eventDetail,startTime} = props;
+    
+  timedata.users.push({
+    startTime: startTime,
+    endTime: endTime,
+    eventDetail: eventDetail,
+    isChild: []
+  });
+  const fs=require('fs');
+  // fs.writeFileSync("./timedata.json",timedata,'utf-8');
+  var text=fs.readFile('../TIMEDATA/timedata.json');
+  
+  console.log(text);
+
+  this.setState({
       eventList: _.concat(this.state.eventList, props),
       isCreateNew: false
     });
@@ -106,7 +129,7 @@ class CalendarBody extends Component {
     return (
       <Grid column="equal">
         <Grid.Column computer={6} tablet={16} mobile={16} floated="left">
-          <SubCalendarBody />
+          <SubCalendarBody subCalendarIndex={this.state.subCalendarIndex}/>
           {_.map(this.state.eventList, val => (
             <p>{`${val.eventDetail} ${val.startTime}~${val.endTime}`} </p>
           ))}
@@ -122,6 +145,8 @@ class CalendarBody extends Component {
           {this.state.isCreateNewString ? <CreateStringEvent /> : null}
           <MainCalendarBody
             createNew={this.createNew}
+            createNewSubCal={this.createNewSubCal}
+            eventClose={this.eventClose}
             createNewString={this.createNewString}
             pivotDay={this.props.pivotDay}
             eventList={this.state.eventList}
