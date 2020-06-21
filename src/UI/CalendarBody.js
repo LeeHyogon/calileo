@@ -67,7 +67,11 @@ class CalendarBody extends Component {
       isCreateNewString: false,
       createNewTime: "",
       eventList: [],
+<<<<<<< HEAD
       subCalendarIndex: -1,
+=======
+      eventinfo : []
+>>>>>>> 727ab70e73879d76ecea866d8000bf739f394f2e
     };
   }
 
@@ -129,10 +133,14 @@ class CalendarBody extends Component {
     return (
       <Grid column="equal">
         <Grid.Column computer={6} tablet={16} mobile={16} floated="left">
+<<<<<<< HEAD
           <SubCalendarBody subCalendarIndex={this.state.subCalendarIndex}/>
           {_.map(this.state.eventList, val => (
             <p>{`${val.eventDetail} ${val.startTime}~${val.endTime}`} </p>
           ))}
+=======
+          <SubCalendarBody eventList={this.state.eventList}/>
+>>>>>>> 727ab70e73879d76ecea866d8000bf739f394f2e
         </Grid.Column>
         <Grid.Column computer={10} tablet={16} mobile={16} floated="right">
           {this.state.isCreateNew ? (
@@ -150,6 +158,10 @@ class CalendarBody extends Component {
             createNewString={this.createNewString}
             pivotDay={this.props.pivotDay}
             eventList={this.state.eventList}
+<<<<<<< HEAD
+=======
+            eventinfo={this.state.eventinfo}
+>>>>>>> 727ab70e73879d76ecea866d8000bf739f394f2e
             timeUnit={this.props.timeUnit} //main.js에서 받아와서 이거에 따라 maincalendar가 다르게 보여지도록 구현할 예정입니다.
           />
         </Grid.Column>
