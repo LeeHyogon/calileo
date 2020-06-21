@@ -1,32 +1,51 @@
 import React, {Component} from 'react'
 import { Grid, Menu, Table, Segment,Checkbox, Icon, Button } from 'semantic-ui-react'
 import _ from "lodash"
-<<<<<<< HEAD
+import moment from "moment";
 import timedata from "../TIMEDATA/timedata.json"
-=======
->>>>>>> 727ab70e73879d76ecea866d8000bf739f394f2e
+
 class SubCalendarBody extends Component{
   constructor(props){
     super(props);
     this.state = {
+      subCalendarIndex :this.props.subCalendarIndex,
+      checked: this.props.viewChild,
     };
   }
 
+  handleChange = (e) => {
+    const { target: { checked } } = e;
+    this.setState({ checked });
+    var Chk=checked;
+    // console.log(this.props.subCalendarIndex);
+    // console.log(timedata.users[this.props.subCalendarIndex]);
+    timedata.users[this.props.subCalendarIndex].viewChild=checked;
+  };
   render(){
-<<<<<<< HEAD
     const {subCalendarIndex} = this.props;
+    // this.setState({subCalendarIndex: this.props.subCalendarIndex});
     var startTime=[];
     var endTime=[];
     var eventDetail=[];
-    var isChild;
+    var isChild,viewChild;
     startTime=_.map(timedata.users,'startTime');
     endTime=_.map(timedata.users,'endTime');
     eventDetail=_.map(timedata.users,'eventDetail');
     isChild=_.map(timedata.users,'isChild');
+    viewChild=_.map(timedata.users,'viewChild');
     return(
       <Segment>
         <div>
           { <p>{`${eventDetail[subCalendarIndex]}`} </p>}
+          <button onClick={()=>this.props.createSubNew(moment(startTime[subCalendarIndex]))}>세부일정 생성</button>
+          <br></br>
+          <p>세부일정 보기 
+            <input
+            name="isGoing"
+            type="checkbox"
+            checked={this.state.checked}
+            onChange={this.handleChange}/></p>
+          
         </div>
         <Menu fluid vertical>
           <Menu.Item onClick>
@@ -38,24 +57,6 @@ class SubCalendarBody extends Component{
               </p>
             ))}
             
-=======
-    const {eventList} = this.props;
-    return(
-      <Segment>
-        <div>
-          {_.map(eventList, val => (
-              <p>{`${val.eventDetail}`} </p>
-          ))}
-        </div>
-        <Menu fluid vertical>
-          <Menu.Item onClick>
-            {_.map(eventList, val => (
-              <p>Start time : {` ${val.startTime} `} </p>
-            ))}
-            {_.map(eventList, val => (
-              <p>End time : {` ${val.endTime} `} </p>
-            ))}
->>>>>>> 727ab70e73879d76ecea866d8000bf739f394f2e
           </Menu.Item>
         </Menu>
       </Segment>

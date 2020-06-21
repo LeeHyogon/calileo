@@ -1,13 +1,9 @@
 import React, { Component } from "react";
 import moment from "moment";
 import _ from "lodash";
-import { Grid, Menu, Table, Segment, Checkbox, Icon,Button } from "semantic-ui-react";
+import { Grid, Menu, Table, Segment, Checkbox, Icon} from "semantic-ui-react";
 import styled from "styled-components";
-<<<<<<< HEAD
 import db from "../server/fb";
-=======
-import db from "../server/fb"
->>>>>>> 727ab70e73879d76ecea866d8000bf739f394f2e
 import timedata from "../TIMEDATA/timedata.json"
 
 function Datetitle(props) {
@@ -29,14 +25,6 @@ const style = {
   //textAlign:  'center',
   //lineHeight: '60px'
 }
-
-const style = {
-            height: '60px',
-            verticalAlign: 'middle',
-            //textAlign:  'center',
-            //lineHeight: '60px'
-}
-
 const StyledButton = styled.button`
   z-index: 3;
   padding: 0.375rem 0.75rem;
@@ -51,29 +39,37 @@ const StyledButton = styled.button`
   width : ${props => props.top || '19vh'};
 `;
 
-<<<<<<< HEAD
 
-// function Button({ content, height, left ,index,createNewSubCal}) {
-//   return (
-//     <StyledButton 
-//       height={height} left={left}
-//     >
-//       {content}
-//     </StyledButton>
-//   );
+// class ChildList extends Component  {
+//   constructor(props) {
+//     super(props);
+//     this.state = {};
+//   }
+
+//   render() {
+//     const {isChild}=this.props;
+//     console.log(isChild);
+//     const listItems=isChild.map((number)=>
+//   <button> {isChild[number].eventDetail}</button>
+//     );
+//     return (
+//       <div>
+//         {listItems}
+//       </div>
+//     )
+//   }
 // }
 
-=======
-function Button({ content, height, left}) {
+function Button({ content, height, left ,index,createNewSubCal,viewChild,isChild}) {
   return (
-    <StyledButton
+    <StyledButton  onClick={()=>createNewSubCal(index)}
       height={height} left={left}
     >
-      {content}
+      {content} 
     </StyledButton>
   );
 }
->>>>>>> 727ab70e73879d76ecea866d8000bf739f394f2e
+
 
 class MainCalendarBody extends Component {
   constructor(props) {
@@ -83,17 +79,13 @@ class MainCalendarBody extends Component {
   }
 
   render() {
-<<<<<<< HEAD
     const { createNew,createNewSubCal,pivotDay} = this.props;
-=======
-    const { eventinfo, eventList ,createNew, pivotDay} = this.props;
->>>>>>> 727ab70e73879d76ecea866d8000bf739f394f2e
     var index = 0;
     var startTime=[];
     var endTime=[];
     var eventDetail=[];
-<<<<<<< HEAD
     var isChild;
+    var viewChild=_.map(timedata.users,'viewChild');
     startTime=_.map(timedata.users,'startTime');
     endTime=_.map(timedata.users,'endTime');
     eventDetail=_.map(timedata.users,'eventDetail');
@@ -110,22 +102,6 @@ class MainCalendarBody extends Component {
           });
         });
     };
-=======
-    startTime=_.map(timedata.users,'startTime');
-    endTime=_.map(timedata.users,'endTime');
-    eventDetail=_.map(timedata.users,'eventDetail');
-
-      db.collection("cities").get().then(function(querySnapshot) {
-        querySnapshot.forEach(function(doc) {
-            console.log(doc.id, " => ", doc.data());
-        //     let startTIme=doc.data().startTIme;
-        //     let endTime=doc.data().endTime;
-        //     let eventDetail=doc.data().eventDetail;
-        });
-
-    });
-
->>>>>>> 727ab70e73879d76ecea866d8000bf739f394f2e
     // const mapToComponent = eventList => {
     //   startTime = _.map(eventList, "startTime");
     //   endTime = _.map(eventList, "endTime");
@@ -155,20 +131,11 @@ class MainCalendarBody extends Component {
     //     );
     //   });
     // };
-<<<<<<< HEAD
-=======
-    const addeventinfo = eventinfo =>{
-    }
->>>>>>> 727ab70e73879d76ecea866d8000bf739f394f2e
     return (
       <div>  
       <Table celled fixed>
         {Datetitle(pivotDay)}
         <Table.Body>
-<<<<<<< HEAD
-=======
-
->>>>>>> 727ab70e73879d76ecea866d8000bf739f394f2e
           {_.map(Array(24), (val, timeIndex) => (
             <Table.Row>
               {_.map(Array(7), (val2, dayIndex) => {
@@ -180,18 +147,11 @@ class MainCalendarBody extends Component {
                   var i=0;
                   var height,width,content;
                   var eventData = [];
-<<<<<<< HEAD
                   var index;
                   startTime.map((v,i) => {
                     if(timeVal.isBetween(moment(startTime[i]),moment(endTime[i]))
                     || timeVal.isSame(startTime[i])
                     ){ChkTime=true;
-=======
-                  startTime.map((v,i) => {
-                    if(timeVal.isBetween(moment(startTime[i]),moment(endTime[i]))
-                     || timeVal.isSame(startTime[i])
-                     ){ChkTime=true;
->>>>>>> 727ab70e73879d76ecea866d8000bf739f394f2e
                     }
                     if(timeVal.isSame(startTime[i])
                       ){ChkTime2=true;
@@ -204,22 +164,9 @@ class MainCalendarBody extends Component {
                       .duration(moment(endTime[i])
                       .diff(moment(startTime[i])))
                       .asDays() + 'vh';
-<<<<<<< HEAD
                       index=i;
                     }
                   });
-=======
-                      eventData = [
-                        {'startTime' : startTime[i],
-                         'endTime' : endTime[i],
-                         'eventDetail' : content
-                        }
-                      ]
-                    }
-                  });
-
-                return (
->>>>>>> 727ab70e73879d76ecea866d8000bf739f394f2e
 
                 return (
                   //StartTime을 기준으로 Table Cell에 버튼을 만든다.
@@ -229,13 +176,9 @@ class MainCalendarBody extends Component {
                     onClick={ChkTime ? null : () => createNew(timeVal)}
                   >
                     <div style={style}>
-<<<<<<< HEAD
-                    {ChkTime2 ?   <Button content={content} height={height} 
-                                    onClick={()=>createNewSubCal(index)}
-=======
+                    {/* {viewChild ? <ChildList isChild={isChild[index]}></ChildList> : null} */}
                     {ChkTime2 ?   <Button content={content} height={height}
-                                    onClick={()=>{eventinfo = eventData}}
->>>>>>> 727ab70e73879d76ecea866d8000bf739f394f2e
+                                    createNewSubCal={()=>createNewSubCal(index)} 
                                   >
                                   </Button>
                                   : timeVal.format("HH:mm")}
