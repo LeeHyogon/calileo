@@ -4,6 +4,7 @@ import _ from "lodash";
 import { Grid, Menu, Table, Segment, Checkbox, Icon } from "semantic-ui-react";
 import styled from "styled-components";
 import db from "../server/fb"
+import timedata from "../TIMEDATA/timedata.json"
 
 function Datetitle(props) {
   return (
@@ -19,24 +20,33 @@ function Datetitle(props) {
   );
 }
 
+const style = {
+            height: '60px',
+            verticalAlign: 'middle',
+            //textAlign:  'center',
+            //lineHeight: '60px'
+}
+
 const StyledButton = styled.button`
-  z-index: 1;
+  z-index: 3;
   padding: 0.375rem 0.75rem;
   border-radius: 0.25rem;
   font-size: 1rem;
   line-height: 1.5;
   border: 1px solid lightgray;
-  height: ${props => props.height || '3vh'};
+  height: ${props => props.height };
   position: absolute;
-  left: ${props => props.left || '1vw' };
-  top: ${props => props.top || '10vh'};
-  width: 19.3vh;
+  left: ${props => props.left };
+  top: ${props => props.top };
+  width : ${props => props.top || '19vh'};
 `;
 
-function Button({ children, height, left, top }) {
+function Button({ content, height, left}) {
   return (
-    <StyledButton height={height} left={left} top={top}>
-      {children}
+    <StyledButton
+      height={height} left={left}
+    >
+      {content}
     </StyledButton>
   );
 }
@@ -48,12 +58,14 @@ class MainCalendarBody extends Component {
   }
 
   render() {
-    const { createNew, pivotDay, eventList} = this.props;
-    // startTime=_.map(eventList,'startTime');
-    // endTime=_.map(eventList,'endTime');
-    const mapToComponent = eventList => {
-
-/*
+    const { eventinfo, eventList ,createNew, pivotDay} = this.props;
+    var index = 0;
+    var startTime=[];
+    var endTime=[];
+    var eventDetail=[];
+    startTime=_.map(timedata.users,'startTime');
+    endTime=_.map(timedata.users,'endTime');
+    eventDetail=_.map(timedata.users,'eventDetail');
 
       db.collection("cities").get().then(function(querySnapshot) {
         querySnapshot.forEach(function(doc) {
@@ -64,51 +76,80 @@ class MainCalendarBody extends Component {
         });
 
     });
-    */
-      var startTime=[];
-      var endTime=[];
-      var eventDetail=[];
 
-
-      startTime = _.map(eventList, "startTime");
-      endTime = _.map(eventList, "endTime");
-      eventDetail = _.map(eventList, "eventDetail");//블럭에 일정 내용 들어가도록
-          return eventList.map((person, i) => {
-            let diff = moment.duration(
-                  moment(endTime[i], "YYYY-MM-DD").diff(
-                  moment(startTime[i], "YYYY-MM-DD")
-                )
-              )
-              .asDays();
-            let top = 3.9*moment(startTime[i]).hour()+10.3+'vh';
-            let left = 8.69*moment(startTime[i]).day()+1.1+'vw';
-            let height= 3.9*moment.duration(moment(endTime[i]).diff(moment(startTime[i]))).asHours()+'vh';
-            let content = eventDetail[i];
-            //console.log(top + " " + left + " ");
-            return (
-              <Button
-                top={top}
-                left={left}
-                height={height}
-              >
-                {content}
-              </Button>
-        );
-      });
-    };
-
+    // const mapToComponent = eventList => {
+    //   startTime = _.map(eventList, "startTime");
+    //   endTime = _.map(eventList, "endTime");
+    //   eventDetail = _.map(eventList, "eventDetail"); //블럭에 일정 내용 들어가도록
+    //   return eventList.map((person, i) => {
+    //     let diff = moment
+    //       .duration(
+    //         moment(endTime[i], "YYYY-MM-DD").diff(
+    //           moment(startTime[i], "YYYY-MM-DD")
+    //         )
+    //       )
+    //       .asDays();
+    //     let top = 3.9 * moment(startTime[i]).hour() + 10.3 + "vh";
+    //     let left = 8.69 * moment(startTime[i]).day() + 1.1 + "vw";
+    //     let height =
+    //       3.9 *
+    //         moment
+    //           .duration(moment(endTime[i]).diff(moment(startTime[i])))
+    //           .asHours() +
+    //       "vh";
+    //     let content = eventDetail[i];
+    //     //console.log(top + " " + left + " ");
+    //     return (
+    //       <Button top={top} left={left} height={height}>
+    //         {content}
+    //       </Button>
+    //     );
+    //   });
+    // };
+    const addeventinfo = eventinfo =>{
+    }
     return (
       <div>
       <Table celled fixed>
         {Datetitle(pivotDay)}
         <Table.Body>
-          {mapToComponent(eventList)}
+
           {_.map(Array(24), (val, timeIndex) => (
             <Table.Row>
               {_.map(Array(7), (val2, dayIndex) => {
                 let timeVal = moment(pivotDay)
                   .add(dayIndex, "d")
                   .add(timeIndex, "h");
+                  var ChkTime = false;
+                  var ChkTime2 = false;
+                  var i=0;
+                  var height,width,content;
+                  var eventData = [];
+                  startTime.map((v,i) => {
+                    if(timeVal.isBetween(moment(startTime[i]),moment(endTime[i]))
+                     || timeVal.isSame(startTime[i])
+                     ){ChkTime=true;
+                    }
+                    if(timeVal.isSame(startTime[i])
+                      ){ChkTime2=true;
+                      content = eventDetail[i];
+                      height = 61 * moment
+                      .duration(moment(endTime[i])
+                      .diff(moment(startTime[i])))
+                      .asHours() + "px";
+                      width = 19.1 + 19.3 * moment
+                      .duration(moment(endTime[i])
+                      .diff(moment(startTime[i])))
+                      .asDays() + 'vh';
+                      eventData = [
+                        {'startTime' : startTime[i],
+                         'endTime' : endTime[i],
+                         'eventDetail' : content
+                        }
+                      ]
+                    }
+                  });
+
                 return (
 
                   //StartTime을 기준으로 Table Cell에 버튼을 만든다.
@@ -116,9 +157,15 @@ class MainCalendarBody extends Component {
                   <Table.Cell
                     selectable
                     verticalAlign="top"
-                    onClick={() => createNew(timeVal)}
+                    onClick={ChkTime ? null : () => createNew(timeVal)}
                   >
-                    {timeVal.format("HH:mm")}
+                    <div style={style}>
+                    {ChkTime2 ?   <Button content={content} height={height}
+                                    onClick={()=>{eventinfo = eventData}}
+                                  >
+                                  </Button>
+                                  : timeVal.format("HH:mm")}
+                    </div>
                   </Table.Cell>
                 );
               })}
