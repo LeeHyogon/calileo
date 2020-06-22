@@ -23,7 +23,7 @@
             "startTime": "2020.06.27 01:00",
             "endTime": "2020.06.27 04:00",
             "eventDetail":"json test2",
-            "viewChild": false,
+            "viewChild": true,
             "isChild":[]
         }
     ]

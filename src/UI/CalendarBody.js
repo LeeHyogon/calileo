@@ -72,6 +72,7 @@ class CalendarBody extends Component {
       createSubNewTime: "",
       eventList: [],
       subCalendarIndex: -1,
+      checkValue : false
     };
   }
 
@@ -174,6 +175,16 @@ class CalendarBody extends Component {
   eventSubClose = props => {
     this.setState({ isCreateSubNew: false });
   };
+
+  //메인캘린더 렌더갱신해서 checkbox체크시 메인캘린더 구성 갱신하는 효과주기위해 넣음.
+  //checkValue는 의미없는값.
+  checkChange =checked =>{
+    // console.log(checked);
+    // console.log(timedata.users[this.state.subCalendarIndex]);
+    // timedata.users[this.state.subCalendarIndex].viewChild=checked;
+    timedata.users[this.state.subCalendarIndex].viewChild=!checked;
+    this.setState({checkValue: !this.state.checkValue});
+  };
   render() {
     var viewChild=_.map(timedata.users,'viewChild');
 
@@ -190,7 +201,8 @@ class CalendarBody extends Component {
           <SubCalendarBody 
           subCalendarIndex={this.state.subCalendarIndex}
           createSubNew={this.createSubNew}
-          viewChild={viewChild[this.state.subCalendarIndex]}
+          isCheck={viewChild[this.state.subCalendarIndex]}
+          checkChange={this.checkChange}
           >
 
           </SubCalendarBody>
@@ -215,6 +227,7 @@ class CalendarBody extends Component {
             pivotDay={this.props.pivotDay}
             eventList={this.state.eventList}
             timeUnit={this.props.timeUnit} //main.js에서 받아와서 이거에 따라 maincalendar가 다르게 보여지도록 구현할 예정입니다.
+            checkValue={this.state.checkValue}
           />
         </Grid.Column>
       </Grid>

@@ -25,8 +25,17 @@ const style = {
   //textAlign:  'center',
   //lineHeight: '60px'
 }
+
+const style2 = {
+  height: '60px',
+  verticalAlign: 'middle',
+  position : 'absolute',
+  zindex : '3',
+ 
+}
+
 const StyledButton = styled.button`
-  z-index: 3;
+  z-index: 1;
   padding: 0.375rem 0.75rem;
   border-radius: 0.25rem;
   font-size: 1rem;
@@ -40,32 +49,36 @@ const StyledButton = styled.button`
 `;
 
 
-// class ChildList extends Component  {
-//   constructor(props) {
-//     super(props);
-//     this.state = {};
-//   }
-
-//   render() {
-//     const {isChild}=this.props;
-//     console.log(isChild);
-//     const listItems=isChild.map((number)=>
-//   <button> {isChild[number].eventDetail}</button>
-//     );
-//     return (
-//       <div>
-//         {listItems}
-//       </div>
-//     )
-//   }
-// }
+class ChildList extends Component  {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+  render() {
+    const {Childlist ,Chk}=this.props;
+    console.log(Childlist);
+    var result;
+    if(Chk){
+       result = Childlist.map((v) => {
+        return <button >{v.eventDetail}</button>
+      });
+    }
+    return (
+      <div  >
+        {result}
+      </div>
+    )
+  }
+}
 
 function Button({ content, height, left ,index,createNewSubCal,viewChild,isChild}) {
   return (
     <StyledButton  onClick={()=>createNewSubCal(index)}
       height={height} left={left}
     >
-      {content} 
+      {/* { <ChildList Childlist={isChild[index]} Chk={true}></ChildList>} */}
+      {content}
+
     </StyledButton>
   );
 }
@@ -175,10 +188,13 @@ class MainCalendarBody extends Component {
                     verticalAlign="top"
                     onClick={ChkTime ? null : () => createNew(timeVal)}
                   >
+
                     <div style={style}>
-                    {/* {viewChild ? <ChildList isChild={isChild[index]}></ChildList> : null} */}
+                    {viewChild[index] ? <ChildList Childlist={isChild[index]} Chk={viewChild[index]}></ChildList> : null}
                     {ChkTime2 ?   <Button content={content} height={height}
                                     createNewSubCal={()=>createNewSubCal(index)} 
+                                    isChild={isChild}
+                                    viewChild={viewChild}
                                   >
                                   </Button>
                                   : timeVal.format("HH:mm")}
