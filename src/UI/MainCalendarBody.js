@@ -60,11 +60,11 @@ class ChildList extends Component  {
     var result;
     if(Chk){
        result = Childlist.map((v) => {
-        return <button >{v.eventDetail}</button>
+        return <button>{v.eventDetail}</button>
       });
     }
     return (
-      <div  >
+      <div>
         {result}
       </div>
     )

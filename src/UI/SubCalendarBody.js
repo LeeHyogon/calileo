@@ -51,6 +51,7 @@ class SubCalendarBody extends Component{
           
         </div>
         <Menu fluid vertical>
+          <p>Start time : {startTime[subCalendarIndex]}</p>
           <Menu.Item onClick>
             {
             _.map(isChild[subCalendarIndex], val => (
@@ -61,6 +62,7 @@ class SubCalendarBody extends Component{
             ))}
             
           </Menu.Item>
+          <p>End Time : {endTime[subCalendarIndex]} </p>
         </Menu>
       </Segment>
     )
