@@ -9,20 +9,21 @@ class SubCalendarBody extends Component{
     super(props);
     this.state = {
       subCalendarIndex :this.props.subCalendarIndex,
-      checked: this.props.viewChild,
+      checked: this.props.isCheck,
     };
   }
 
   handleChange = (e) => {
     const { target: { checked } } = e;
-    this.setState({ checked });
     var Chk=checked;
     // console.log(this.props.subCalendarIndex);
     // console.log(timedata.users[this.props.subCalendarIndex]);
-    timedata.users[this.props.subCalendarIndex].viewChild=checked;
+    // timedata.users[this.props.subCalendarIndex].viewChild=checked;
+    this.setState({ checked });
   };
   render(){
-    const {subCalendarIndex} = this.props;
+    const {subCalendarIndex,isCheck} = this.props;
+    console.log(this.props.isCheck+"isCheck");
     // this.setState({subCalendarIndex: this.props.subCalendarIndex});
     var startTime=[];
     var endTime=[];
@@ -43,8 +44,10 @@ class SubCalendarBody extends Component{
             <input
             name="isGoing"
             type="checkbox"
-            checked={this.state.checked}
-            onChange={this.handleChange}/></p>
+            checked={this.props.isCheck}
+            onChange={()=>this.props.checkChange(this.props.isCheck)}
+            onClick={this.handleChange}
+            /></p>
           
         </div>
         <Menu fluid vertical>
