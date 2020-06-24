@@ -6,7 +6,7 @@ import _ from "lodash";
 
 const { containerBootstrap } = require("@nlpjs/core");
 const { Nlp } = require("@nlpjs/nlp");
-const { LangEn } = require("@nlpjs/lang-en");
+// const { LangEn } = require("@nlpjs/lang-en");
 const { LangKo } = require("@nlpjs/lang-ko");
 // const { requestfs } = require('@nlpjs/request-rn');
 
@@ -45,7 +45,7 @@ export let nlpMain = async (NLP, eventString) => {
 
   }
   else if (response.answer == "일정 요약") {
-    alert("요약" + eventString);
+    stringDivider(eventString);
   }
 };
 
