@@ -31,11 +31,10 @@ const style2 = {
   verticalAlign: 'middle',
   position : 'absolute',
   zindex : '3',
-
 }
 
 const StyledButton = styled.button`
-  z-index: 3;
+  z-index: 1;
   padding: 0.375rem 0.75rem;
   border-radius: 0.25rem;
   font-size: 1rem;
@@ -88,40 +87,48 @@ class ChildList extends Component  {
 
 function Button({ content, height, left ,index,createNewSubCal,viewChild,isChild}) {
   return (
-    <StyledButton
+    <StyledButton  onClick={()=>createNewSubCal(index)}
       height={height} left={left}
     >
+      {/* { <ChildList Childlist={isChild[index]} Chk={true}></ChildList>} */}
       {content}
+
     </StyledButton>
   );
 }
 
+
 class MainCalendarBody extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+    };
   }
 
   render() {
-    const { eventinfo, eventList ,createNew, pivotDay} = this.props;
+    const { createNew,createNewSubCal,pivotDay} = this.props;
     var index = 0;
     var startTime=[];
     var endTime=[];
     var eventDetail=[];
+    var isChild;
+    var viewChild=_.map(timedata.users,'viewChild');
     startTime=_.map(timedata.users,'startTime');
     endTime=_.map(timedata.users,'endTime');
     eventDetail=_.map(timedata.users,'eventDetail');
-
-      db.collection("cities").get().then(function(querySnapshot) {
-        querySnapshot.forEach(function(doc) {
-            console.log(doc.id, " => ", doc.data());
-        //     let startTIme=doc.data().startTIme;
-        //     let endTime=doc.data().endTime;
-        //     let eventDetail=doc.data().eventDetail;
+    isChild=_.map(timedata.users,'isChild');
+    const inputFirestore = e => {
+      db.collection("users")
+        .get()
+        .then(function(querySnapshot) {
+          querySnapshot.forEach(function(doc) {
+            // startTime[index] = moment(doc.data().startTime).format("YYYY.MM.DD HH:mm");
+            // endTime[index] = moment(doc.data().endTime).format("YYYY.MM.DD HH:mm");
+            // eventDetail[index] = doc.data().eventDetail;
+            // index += 1;
+          });
         });
-
-    });
-
+    };
     // const mapToComponent = eventList => {
     //   startTime = _.map(eventList, "startTime");
     //   endTime = _.map(eventList, "endTime");
@@ -151,14 +158,11 @@ class MainCalendarBody extends Component {
     //     );
     //   });
     // };
-    const addeventinfo = eventinfo =>{
-    }
     return (
-      <div>
+      <div>  
       <Table celled fixed>
         {Datetitle(pivotDay)}
         <Table.Body>
-
           {_.map(Array(24), (val, timeIndex) => (
             <Table.Row>
               {_.map(Array(7), (val2, dayIndex) => {
@@ -170,10 +174,11 @@ class MainCalendarBody extends Component {
                   var i=0;
                   var height,width,content;
                   var eventData = [];
+                  var index;
                   startTime.map((v,i) => {
                     if(timeVal.isBetween(moment(startTime[i]),moment(endTime[i]))
-                     || timeVal.isSame(startTime[i])
-                     ){ChkTime=true;
+                    || timeVal.isSame(startTime[i])
+                    ){ChkTime=true;
                     }
                     if(timeVal.isSame(startTime[i])
                       ){ChkTime2=true;
@@ -186,24 +191,18 @@ class MainCalendarBody extends Component {
                       .duration(moment(endTime[i])
                       .diff(moment(startTime[i])))
                       .asDays() + 'vh';
-                      eventData = [
-                        {'startTime' : startTime[i],
-                         'endTime' : endTime[i],
-                         'eventDetail' : content
-                        }
-                      ]
+                      index=i;
                     }
                   });
 
                 return (
-
                   //StartTime을 기준으로 Table Cell에 버튼을 만든다.
-
                   <Table.Cell
                     selectable
                     verticalAlign="top"
                     onClick={ChkTime ? null : () => createNew(timeVal)}
                   >
+
                     <div style={style}>
                     {ChkTime2 ?   <Button content={viewChild[index] ? <ChildList Start={startTime[i]} content={content} Childlist={isChild[index]} Chk={viewChild[index]}></ChildList> : content} height={height}
                                     createNewSubCal={()=>createNewSubCal(index)}
@@ -219,9 +218,10 @@ class MainCalendarBody extends Component {
               })}
             </Table.Row>
           ))}
-        </Table.Body>
+          </Table.Body>
       </Table>
       <button onClick = {()=>this.props.createNewString()}> String으로 일정 만들기 </button>
+
       </div>
     );
   }

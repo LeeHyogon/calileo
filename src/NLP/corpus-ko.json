@@ -1,0 +1,17 @@
+{
+  "name": "Corpus",
+  "locale": "ko-KR",
+  "data": [
+    {
+      "intent": "event.ask",
+      "utterances": [
+        "몇 시가 좋아",
+        "언제볼까"
+      ],
+      "answers": [
+        { "answer": "내일 보자구" },
+        { "answer": "언제든지" },
+        { "answer": "너무 늦지않게만 보자" }
+      ]
+    }]
+}
