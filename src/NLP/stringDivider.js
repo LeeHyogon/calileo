@@ -24,8 +24,18 @@
 export default function stringDivider (eventString){
   // let phraseArr = eventString.split(' ')
   // alert(phraseArr)
-  let si = eventString.search(/시/)
-  alert(eventString[si-1])
-
-
+  //let si = eventString.search(/시/)
+  //alert(eventString[si-1])
+  let rule = /.(?=요일)/; //수, 목, 금 etc추출
+  let time = /[0-9]+시/;
+  var ww = []
+  var date = []
+  ww = eventString.split(' ');
+  for(var i =0; i < ww.length; i++){
+    if(rule.test(ww[i]))
+      date.push(rule.exec(ww[i]));
+    else(time.test(ww[i]))
+      date.push(time.exec(ww[i]));
+  }
+    alert(date);
 }
