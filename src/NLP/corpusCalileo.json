@@ -1,0 +1,90 @@
+{
+  "Document": [
+    {
+      "lang": "ko",
+      "inputString": "내일 3시 홍문관 앞에서 콜?",
+      "group": "Appointment.sentence"
+    },
+    {
+      "lang": "ko",
+      "inputString": "6/20 8시",
+      "group": "Appointment.short "
+    },
+    {
+      "lang": "ko",
+      "inputString": "그럼 김 군과 함께 목요일 아침에 뵙겠습니다.",
+      "group": "Appointment.sentence"
+    },
+    {
+      "lang": "ko",
+      "inputString": "차주 23시로 컨펌하죠",
+      "group": "Appointment.sentence"
+    },
+    {
+      "lang": "ko",
+      "inputString": "오늘 자정에 상수역에서 보자",
+      "group": "Appointment.sentence"
+    },
+    {
+      "lang": "ko",
+      "inputString": "3시 반",
+      "group": "Appointment.short"
+    },
+    {
+      "lang": "ko",
+      "inputString": "다음 주 금요일에 발표가 있어",
+      "group": "Appointment.sentence"
+    },
+    {
+      "lang": "ko",
+      "inputString": "그때로 ㄱㄱ",
+      "group": "Appointment.short"
+    },
+    {
+      "lang": "ko",
+      "inputString": "그러면 내일 오후로 하지",
+      "group": "Appointment.sentence"
+    },
+    {
+      "lang": "ko",
+      "inputString": "내일 지난 번에 갔던 곳에 또 가자",
+      "group": "Appointment.sentence"
+    },
+    {
+      "lang": "ko",
+      "inputString": "방학 때 제주도에 가자",
+      "group": "Appointment.sentence"
+    },
+    {
+      "lang": "ko",
+      "inputString": "종강 날에 맥도날드에서 회식이 있을 예정이야",
+      "group": "Appointment.sentence"
+    },
+    {
+      "lang": "ko",
+      "inputString": "오늘(6/19) 자정까지 연락 바랍니다",
+      "group": "Appointment.sentence"
+    },
+    {
+      "lang": "ko",
+      "inputString": "이따 6시에 저기서 다시 만나",
+      "group": "Appointment.sentence"
+    },
+    {
+      "lang": "ko",
+      "inputString": "17시 홍문관 810호 ",
+      "group": "Appointment.short"
+    }
+  ],
+  "Answer": [
+  {
+    "lang": "ko",
+    "outputString": "일정 문장",
+    "group": "Appointment.sentence"
+  },
+  {
+    "lang": "ko",
+    "outputString": "일정 요약",
+    "group": "Appointment.short"
+  }]
+}
