@@ -94,13 +94,16 @@ class CalendarBody extends Component {
 
   //메인캘린더에서 일정 클릭시 서브캘린더에 서브일정 보이게 해줌.
   createNewSubCal = props => {
-    var viewChild=_.map(timedata.users,'viewChild');
+    var viewChild=_.map(timedata.tree,'viewChild');
     console.log(viewChild[this.state.subCalendarIndex]);
     this.setState({ subCalendarIndex: props});
     // if(this.state.subCalendarIndex>=0){
     //   console.log(timedata.users[this.state.subCalendarIndex]);
     // }
     
+  };
+  viewSubCal = props => {
+   console.log("작동");
   };
 
   createNewString = props => {
@@ -122,7 +125,7 @@ class CalendarBody extends Component {
     //       console.error("Error adding document: ", error);
     //   });  
   const { endTime,eventDetail,startTime} = props;
-  timedata.users.push({
+  timedata.tree.push({
     startTime: startTime,
     endTime: endTime,
     eventDetail: eventDetail,
@@ -159,11 +162,11 @@ class CalendarBody extends Component {
 
   enlistSubNew = props => {
   const { endTime,eventDetail,startTime} = props;
-  timedata.users[this.state.subCalendarIndex].isChild.push({
+  timedata.tree[this.state.subCalendarIndex].tree.push({
     startTime: startTime,
     endTime: endTime,
     eventDetail: eventDetail,
-    isChild: []
+    tree: []
   })
   this.setState({
       isCreateSubNew: false
@@ -222,6 +225,7 @@ class CalendarBody extends Component {
           <MainCalendarBody
             createNew={this.createNew}
             createNewSubCal={this.createNewSubCal}
+            viewSubCal={this.viewSubCal}
             eventClose={this.eventClose}
             createNewString={this.createNewString}
             pivotDay={this.props.pivotDay}
