@@ -23,7 +23,7 @@ class SubCalendarBody extends Component{
   };
   render(){
     const {subCalendarIndex,isCheck} = this.props;
-    console.log(this.props.isCheck+"isCheck");
+    //console.log(this.props.isCheck+"isCheck");
     // this.setState({subCalendarIndex: this.props.subCalendarIndex});
     var startTime=[];
     var endTime=[];

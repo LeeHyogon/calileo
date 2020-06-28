@@ -66,7 +66,6 @@ class ChildList extends Component  {
          .duration(moment(Start)
          .diff(moment(v.startTime)))
          .asHours() + 'px';
-
          height = 61 * moment
          .duration(moment(v.endTime)
          .diff(moment(v.startTime)))
