@@ -1,51 +1,45 @@
 {
     "tree": [
         {
-            "id" :1,
             "startTime": "2020.06.30 01:00",
             "endTime": "2020.06.30 05:00",
             "eventDetail":"json test1" ,
             "viewChild": true,
             "tree": [
                 {
-                    "id" :13,
                     "startTime": "2020.06.30 02:00",
                     "endTime": "2020.06.30 03:00",
-                    "eventDetail":"json test1-a",
+                    "eventDetail":"json test1-1",
                     "viewChild":true,
                     "tree":[
                         {
-                            "id" :135,
                             "startTime": "2020.06.30 02:00",
 				            "endTime": "2020.06.30 03:00",
-                            "eventDetail":"json test 하위1", 
+                            "eventDetail":"json test1-1-1", 
 						    "viewChild": true,
                             "tree":[]
                         },
                         {
-                            "id" :1357,
                             "startTime": "2020.06.30 02:00",
 				            "endTime": "2020.06.30 03:00",
-                            "eventDetail":"json test 하위2", 
+                            "eventDetail":"json test1-1-2", 
 						    "viewChild": true,
                             "tree":[]
                         }
                     ]
                 },
                 {
-                    "id" :1123,
                     "startTime": "2020.06.30 03:00",
                     "endTime": "2020.06.30 04:00",
-                    "eventDetail":"json test1-b",
+                    "eventDetail":"json test1-2",
                     "viewChild": true,
                     "tree":[] 
                 }
             ]    
         },
         {
-            "id" :1132,
-            "startTime": "2020.07.03 01:00",
-            "endTime": "2020.07.03 04:00",
+            "startTime": "2020.07.01 01:00",
+            "endTime": "2020.07.01 04:00",
             "eventDetail":"json test2",
             "viewChild": true,
             "tree":[]

@@ -47,7 +47,6 @@ const StyledButton = styled.button`
   width : ${props => props.width || '19vh'};
 `;
 
-
 class ChildList extends Component  {
   constructor(props) {
     super(props);
@@ -89,14 +88,61 @@ function Button({ content, height, left ,index,createNewSubCal,viewChild,isChild
     <StyledButton  onClick={()=>createNewSubCal(index)}
       height={height} left={left}
     >
-      {/* { <ChildList Childlist={isChild[index]} Chk={true}></ChildList>} */}
+     
       {content}
 
     </StyledButton>
   );
 }
 
-
+const Member=(tree)=>{
+  
+  return (
+  <button onClick={()=>{
+    console.log("Map클릭");
+  }}>
+    {tree.tree.eventDetail+"Member"}
+    </button>
+  );
+}
+class ListBlock extends Component{
+  constructor(props) {
+    super(props);
+    this.state = {
+      click : true,
+    };
+  }
+  hasChildren(tree){
+    return tree.tree &&tree.tree.length;
+  }
+  render(){
+    var click=true;
+    const level=this.props.level || 0;
+    // console.log(this.props);
+    let eventDetail=this.props.eventDetail;
+    return <button style={style2} onClick={()=>{
+      if(click){
+        console.log(this.props.id);
+        this.props.viewSubCal();
+      }
+    }}>
+      {this.props.eventDetail+"ListBlock"}
+      {this.props.trees.map((tree,i)=>{
+        return <div>
+          {/* <Member tree={tree}/> */}
+          <button onClick={()=>{
+            console.log(tree.id);
+            
+            this.props.viewSubCal();
+          }}>{tree.eventDetail+"underbutton"}</button>
+          {this.hasChildren(tree)&& <ListBlock trees={tree.tree}  eventDetail={tree.eventDetail}level={level+1} 
+          viewSubCal={()=>this.props.viewSubCal()} id={tree.id}
+          />}
+        </div>
+      })}
+    </button>
+  }
+}
 class MainCalendarBody extends Component {
   constructor(props) {
     super(props);
@@ -104,18 +150,21 @@ class MainCalendarBody extends Component {
     };
   }
 
+  
   render() {
-    const { createNew,createNewSubCal,pivotDay} = this.props;
+    const { createNew,createNewSubCal,viewSubCal,pivotDay} = this.props;
     var index = 0;
     var startTime=[];
     var endTime=[];
     var eventDetail=[];
     var isChild;
-    var viewChild=_.map(timedata.users,'viewChild');
-    startTime=_.map(timedata.users,'startTime');
-    endTime=_.map(timedata.users,'endTime');
-    eventDetail=_.map(timedata.users,'eventDetail');
-    isChild=_.map(timedata.users,'isChild');
+    var id;
+    var viewChild=_.map(timedata.tree,'viewChild');
+    startTime=_.map(timedata.tree,'startTime');
+    endTime=_.map(timedata.tree,'endTime');
+    eventDetail=_.map(timedata.tree,'eventDetail');
+    isChild=_.map(timedata.tree,'tree');
+    id=_.map(timedata.tree,'id');
     const inputFirestore = e => {
       db.collection("users")
         .get()
@@ -157,6 +206,7 @@ class MainCalendarBody extends Component {
     //     );
     //   });
     // };
+    
     return (
       <div>  
       <Table celled fixed>
@@ -203,13 +253,19 @@ class MainCalendarBody extends Component {
                   >
 
                     <div style={style}>
-                    {ChkTime2 ?   <Button content={viewChild[index] ? <ChildList Start={startTime[i]} content={content} Childlist={isChild[index]} Chk={viewChild[index]}></ChildList> : content} height={height}
+                      
+                    {/* {ChkTime2 ?   <Button content={viewChild[index] ? <ChildList Start={startTime[i]} content={content} Childlist={isChild[index]} Chk={viewChild[index]}></ChildList> : content} height={height}
                                     createNewSubCal={()=>createNewSubCal(index)}
                                     isChild={isChild}
                                     viewChild={viewChild}
                                   >
-
                                   </Button>
+                                  : timeVal.format("HH:mm")} */}
+                  
+                    {ChkTime2 ?   <ListBlock trees={timedata.tree[index].tree} eventDetail={eventDetail[index]}
+                                  viewSubCal={()=>viewSubCal()}
+                                  id={id[index]}
+                                  />
                                   : timeVal.format("HH:mm")}
                     </div>
                   </Table.Cell>

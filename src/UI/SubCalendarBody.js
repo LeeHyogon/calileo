@@ -29,11 +29,11 @@ class SubCalendarBody extends Component{
     var endTime=[];
     var eventDetail=[];
     var isChild,viewChild;
-    startTime=_.map(timedata.users,'startTime');
-    endTime=_.map(timedata.users,'endTime');
-    eventDetail=_.map(timedata.users,'eventDetail');
-    isChild=_.map(timedata.users,'isChild');
-    viewChild=_.map(timedata.users,'viewChild');
+    startTime=_.map(timedata.tree,'startTime');
+    endTime=_.map(timedata.tree,'endTime');
+    eventDetail=_.map(timedata.tree,'eventDetail');
+    isChild=_.map(timedata.tree,'tree');
+    viewChild=_.map(timedata.tree,'viewChild');
     return(
       <Segment>
         <div>
