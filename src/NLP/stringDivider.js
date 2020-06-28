@@ -21,6 +21,8 @@
 //     }
 // }
 
+//돌아~오는 이번주 금요일 18시에 만나요~
+
 export default function stringDivider (eventString){
   // let phraseArr = eventString.split(' ')
   // alert(phraseArr)
