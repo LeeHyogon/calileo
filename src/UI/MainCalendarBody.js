@@ -110,11 +110,9 @@ class ListBlock extends Component{
     this.state={
     }  
   }
-  
   hasChildren(tree){
     return tree.tree &&tree.tree.length;
   }
-
   render(){
     const level=this.props.level || 0;
     let eventDetail=this.props.eventDetail;

@@ -190,6 +190,7 @@ class CalendarBody extends Component {
     timedata.users[this.state.subCalendarIndex].viewChild=!checked;
     this.setState({checkValue: !this.state.checkValue});
   };
+  
   render() {
     var viewChild=_.map(timedata.users,'viewChild');
 
