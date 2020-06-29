@@ -87,8 +87,7 @@ function Button({ content, height, left ,index,createNewSubCal,viewChild,isChild
   return (
     <StyledButton  onClick={()=>createNewSubCal(index)}
       height={height} left={left}
-    >
-     
+    >     
       {content}
 
     </StyledButton>
@@ -108,35 +107,32 @@ const Member=(tree)=>{
 class ListBlock extends Component{
   constructor(props) {
     super(props);
-    this.state = {
-      click : true,
-    };
+    this.state={
+    }  
   }
+  
   hasChildren(tree){
     return tree.tree &&tree.tree.length;
   }
+
   render(){
-    var click=true;
     const level=this.props.level || 0;
-    // console.log(this.props);
     let eventDetail=this.props.eventDetail;
-    return <button style={style2} onClick={()=>{
-      if(click){
-        console.log(this.props.id);
-        this.props.viewSubCal();
-      }
+    return <button style={style2} onClick={(evt)=>{
+        evt.stopPropagation();
+        this.props.transId(this.props.id);
     }}>
       {this.props.eventDetail+"ListBlock"}
       {this.props.trees.map((tree,i)=>{
         return <div>
           {/* <Member tree={tree}/> */}
-          <button onClick={()=>{
-            console.log(tree.id);
-            
-            this.props.viewSubCal();
+          <button onClick={(evt)=>{
+            // console.log(tree.id);
+            evt.stopPropagation();
+            this.props.transId(tree.id);    
           }}>{tree.eventDetail+"underbutton"}</button>
           {this.hasChildren(tree)&& <ListBlock trees={tree.tree}  eventDetail={tree.eventDetail}level={level+1} 
-          viewSubCal={()=>this.props.viewSubCal()} id={tree.id}
+          transId={this.props.transId} id={tree.id} 
           />}
         </div>
       })}
@@ -147,6 +143,7 @@ class MainCalendarBody extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      
     };
   }
 
@@ -165,6 +162,10 @@ class MainCalendarBody extends Component {
     eventDetail=_.map(timedata.tree,'eventDetail');
     isChild=_.map(timedata.tree,'tree');
     id=_.map(timedata.tree,'id');
+    const transId = e =>{
+      viewSubCal(e);
+    };
+    
     const inputFirestore = e => {
       db.collection("users")
         .get()
@@ -206,7 +207,7 @@ class MainCalendarBody extends Component {
     //     );
     //   });
     // };
-    
+   
     return (
       <div>  
       <Table celled fixed>
@@ -251,7 +252,6 @@ class MainCalendarBody extends Component {
                     verticalAlign="top"
                     onClick={ChkTime ? null : () => createNew(timeVal)}
                   >
-
                     <div style={style}>
                       
                     {/* {ChkTime2 ?   <Button content={viewChild[index] ? <ChildList Start={startTime[i]} content={content} Childlist={isChild[index]} Chk={viewChild[index]}></ChildList> : content} height={height}
@@ -263,7 +263,7 @@ class MainCalendarBody extends Component {
                                   : timeVal.format("HH:mm")} */}
                   
                     {ChkTime2 ?   <ListBlock trees={timedata.tree[index].tree} eventDetail={eventDetail[index]}
-                                  viewSubCal={()=>viewSubCal()}
+                                  transId={transId} 
                                   id={id[index]}
                                   />
                                   : timeVal.format("HH:mm")}

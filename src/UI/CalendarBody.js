@@ -72,6 +72,7 @@ class CalendarBody extends Component {
       createSubNewTime: "",
       eventList: [],
       subCalendarIndex: -1,
+      subCalendarId:0,
       checkValue : false
     };
   }
@@ -103,7 +104,8 @@ class CalendarBody extends Component {
     
   };
   viewSubCal = props => {
-   console.log("작동");
+    console.log(props);
+    this.setState({subCalendarId:props});
   };
 
   createNewString = props => {
@@ -203,6 +205,7 @@ class CalendarBody extends Component {
             ) : null}
           <SubCalendarBody 
           subCalendarIndex={this.state.subCalendarIndex}
+          subCalendarId={this.state.subCalendarId}
           createSubNew={this.createSubNew}
           isCheck={viewChild[this.state.subCalendarIndex]}
           checkChange={this.checkChange}
