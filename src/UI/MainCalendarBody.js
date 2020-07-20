@@ -5,6 +5,7 @@ import { Grid, Menu, Table, Segment, Checkbox, Icon} from "semantic-ui-react";
 import styled from "styled-components";
 import db from "../server/fb";
 import timedata from "../TIMEDATA/timedata.json"
+import FileUpload from "./FileUpload";
 
 function Datetitle(props) {
   return (
@@ -108,6 +109,7 @@ class ListBlock extends Component{
   constructor(props) {
     super(props);
     this.state={
+      items:[],
     }  
   }
   hasChildren(tree){
@@ -205,7 +207,6 @@ class MainCalendarBody extends Component {
     //     );
     //   });
     // };
-   
     return (
       <div>  
       <Table celled fixed>
@@ -274,7 +275,8 @@ class MainCalendarBody extends Component {
           </Table.Body>
       </Table>
       <button onClick = {()=>this.props.createNewString()}> String으로 일정 만들기 </button>
-
+      <br></br>
+      <FileUpload></FileUpload>
       </div>
     );
   }
