@@ -15,6 +15,7 @@
     "@testing-library/user-event": "^7.1.2",
     "browserify-fs": "^1.0.0",
     "firebase": "^7.14.2",
+    "googleapis": "^39.2.0",
     "gulp-print": "^5.0.0",
     "lodash": "^4.17.15",
     "moment": "^2.25.3",
