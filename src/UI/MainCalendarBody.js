@@ -167,16 +167,30 @@ class MainCalendarBody extends Component {
     };
     
     const inputFirestore = e => {
-      db.collection("users")
-        .get()
-        .then(function(querySnapshot) {
-          querySnapshot.forEach(function(doc) {
-            // startTime[index] = moment(doc.data().startTime).format("YYYY.MM.DD HH:mm");
-            // endTime[index] = moment(doc.data().endTime).format("YYYY.MM.DD HH:mm");
-            // eventDetail[index] = doc.data().eventDetail;
-            // index += 1;
-          });
-        });
+    //   var apple=JSON.stringify(timedata);
+    //   console.log(apple);
+    //   db.collection("trees").doc("LA").set({
+    //     apple
+    // })
+    // .then(function(docRef) {
+    //     console.log("Document written with ID: ", docRef.id);
+    // })
+    // .catch(function(error) {
+    //     console.error("Error adding document: ", error);
+    // });
+      var data;
+      var docRef = db.collection("trees").doc("LA");
+      docRef.get().then(function(doc) {
+          if (doc.exists) {
+              // console.log("Document data:", doc.data());
+              data=JSON.parse(doc.data().apple);
+          } else {
+              // doc.data() will be undefined in this case
+              console.log("No such document!");
+          }
+      }).catch(function(error) {
+          console.log("Error getting document:", error);
+      });
     };
     // const mapToComponent = eventList => {
     //   startTime = _.map(eventList, "startTime");
@@ -211,6 +225,7 @@ class MainCalendarBody extends Component {
       <div>  
       <Table celled fixed>
         {Datetitle(pivotDay)}
+        {inputFirestore()}
         <Table.Body>
           {_.map(Array(24), (val, timeIndex) => (
             <Table.Row>
