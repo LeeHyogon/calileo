@@ -4,8 +4,8 @@ import _ from "lodash";
 import { Grid, Menu, Table, Segment, Checkbox, Icon} from "semantic-ui-react";
 import styled from "styled-components";
 import db from "../server/fb";
-import timedata from "../TIMEDATA/timedata.json"
 import FileUpload from "./FileUpload";
+import tmpdata from "../TIMEDATA/timedata.json"
 
 function Datetitle(props) {
   return (
@@ -115,6 +115,7 @@ class ListBlock extends Component{
   hasChildren(tree){
     return tree.tree &&tree.tree.length;
   }
+
   render(){
     const level=this.props.level || 0;
     let eventDetail=this.props.eventDetail;
@@ -142,56 +143,66 @@ class ListBlock extends Component{
 class MainCalendarBody extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
-      
+      timedata: null,
+      items:null,
     };
   }
+  inputDateToState=()=>{
+      // 모든문서 다넣는 코드. 
+      //   var docRef = db.collection("trees"); 
+      //   var items=[];
+      //   docRef.get().then(function(querySnapshot) {
+      //     querySnapshot.forEach(function(doc) {
+      //       items.push(doc.data());  
+      //       console.log(doc.id, " => ", doc.data());
+      //     });
+      // });
+      // this.setState({items:items});
+      // console.log(this.state.items);
+      console.log("inputDateToState함수 실행 확인");
+      var docRef=db.collection("trees").doc("LA");
+      var data;
+      docRef.get().then(function(doc) {
+        if (doc.exists) {
+            console.log("Document data:", doc.data());
+            data=doc.data();
+        } else {
+            // doc.data() will be undefined in this case
+            console.log("No such document!");
+        }
+    }).catch(function(error) {
+        console.log("Error getting document:", error);
+    });
+    this.setState({timedata:data});
+    console.log("inputDateToState함수 종료");
+  }
+  componentWillMount(){
+    this.inputDateToState();
+    console.log(this.state);
+  }
 
-  
   render() {
     const { createNew,createNewSubCal,viewSubCal,pivotDay} = this.props;
     var index = 0;
+    var id;
     var startTime=[];
     var endTime=[];
     var eventDetail=[];
     var isChild;
-    var id;
-    var viewChild=_.map(timedata.tree,'viewChild');
-    startTime=_.map(timedata.tree,'startTime');
-    endTime=_.map(timedata.tree,'endTime');
-    eventDetail=_.map(timedata.tree,'eventDetail');
-    isChild=_.map(timedata.tree,'tree');
-    id=_.map(timedata.tree,'id');
+    var viewChild;
+    // viewChild=_.map(this.state.timedata.trees,'viewChild');
+    // startTime=_.map(this.state.timedata.trees,'startTime');
+    // endTime=_.map(this.state.timedata.trees,'endTime');
+    // eventDetail=_.map(this.state.timedata.trees,'eventDetail');
+    // isChild=_.map(this.state.timedata.trees,'isChild');
     const transId = e =>{
       viewSubCal(e);
     };
-    
-    const inputFirestore = e => {
-    //   var apple=JSON.stringify(timedata);
-    //   console.log(apple);
-    //   db.collection("trees").doc("LA").set({
-    //     apple
-    // })
-    // .then(function(docRef) {
-    //     console.log("Document written with ID: ", docRef.id);
-    // })
-    // .catch(function(error) {
-    //     console.error("Error adding document: ", error);
-    // });
-      var data;
-      var docRef = db.collection("trees").doc("LA");
-      docRef.get().then(function(doc) {
-          if (doc.exists) {
-              // console.log("Document data:", doc.data());
-              data=JSON.parse(doc.data().apple);
-          } else {
-              // doc.data() will be undefined in this case
-              console.log("No such document!");
-          }
-      }).catch(function(error) {
-          console.log("Error getting document:", error);
-      });
-    };
+    const inputFirestore=e=>{
+      // console.log(JSON.stringify(tmpdata));
+    }
     // const mapToComponent = eventList => {
     //   startTime = _.map(eventList, "startTime");
     //   endTime = _.map(eventList, "endTime");
@@ -225,7 +236,6 @@ class MainCalendarBody extends Component {
       <div>  
       <Table celled fixed>
         {Datetitle(pivotDay)}
-        {inputFirestore()}
         <Table.Body>
           {_.map(Array(24), (val, timeIndex) => (
             <Table.Row>
@@ -239,26 +249,25 @@ class MainCalendarBody extends Component {
                   var height,width,content;
                   var eventData = [];
                   var index;
-                  startTime.map((v,i) => {
-                    if(timeVal.isBetween(moment(startTime[i]),moment(endTime[i]))
-                    || timeVal.isSame(startTime[i])
-                    ){ChkTime=true;
-                    }
-                    if(timeVal.isSame(startTime[i])
-                      ){ChkTime2=true;
-                      content = eventDetail[i];
-                      height = 61 * moment
-                      .duration(moment(endTime[i])
-                      .diff(moment(startTime[i])))
-                      .asHours() + "px";
-                      width = 19.1 + 19.3 * moment
-                      .duration(moment(endTime[i])
-                      .diff(moment(startTime[i])))
-                      .asDays() + 'vh';
-                      index=i;
-                    }
-                  });
-
+                  // startTime.map((v,i) => {
+                  //   if(timeVal.isBetween(moment(startTime[i]),moment(endTime[i]))
+                  //   || timeVal.isSame(startTime[i])
+                  //   ){ChkTime=true;
+                  //   }
+                  //   if(timeVal.isSame(startTime[i])
+                  //     ){ChkTime2=true;
+                  //     content = eventDetail[i];
+                  //     height = 61 * moment
+                  //     .duration(moment(endTime[i])
+                  //     .diff(moment(startTime[i])))
+                  //     .asHours() + "px";
+                  //     width = 19.1 + 19.3 * moment
+                  //     .duration(moment(endTime[i])
+                  //     .diff(moment(startTime[i])))
+                  //     .asDays() + 'vh';
+                  //     index=i;
+                  //   }
+                  // });
                 return (
                   //StartTime을 기준으로 Table Cell에 버튼을 만든다.
                   <Table.Cell
@@ -267,7 +276,6 @@ class MainCalendarBody extends Component {
                     onClick={ChkTime ? null : () => createNew(timeVal)}
                   >
                     <div style={style}>
-                      
                     {/* {ChkTime2 ?   <Button content={viewChild[index] ? <ChildList Start={startTime[i]} content={content} Childlist={isChild[index]} Chk={viewChild[index]}></ChildList> : content} height={height}
                                     createNewSubCal={()=>createNewSubCal(index)}
                                     isChild={isChild}
@@ -276,11 +284,11 @@ class MainCalendarBody extends Component {
                                   </Button>
                                   : timeVal.format("HH:mm")} */}
                   
-                    {ChkTime2 ?   <ListBlock trees={timedata.tree[index].tree} eventDetail={eventDetail[index]}
+                    {/* {ChkTime2 ?   <ListBlock trees={this.state.timedata.tree[index].tree} eventDetail={eventDetail[index]}
                                   transId={transId} 
                                   id={id[index]}
                                   />
-                                  : timeVal.format("HH:mm")}
+                                  : timeVal.format("HH:mm")} */}
                     </div>
                   </Table.Cell>
                 );
