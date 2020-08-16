@@ -2,30 +2,30 @@
     "tree": [
         {
             "id" :1,
-            "startTime": "2020.08.03 01:00",
-            "endTime": "2020.08.03 05:00",
+            "startTime": "2020.08.16 01:00",
+            "endTime": "2020.08.16 05:00",
             "eventDetail":"json test1" ,
             "viewChild": true,
             "tree": [
                 {
                     "id" :13,
-                    "startTime": "2020.08.03 02:00",
-                    "endTime": "2020.08.03 03:00",
+                    "startTime": "2020.08.16 02:00",
+                    "endTime": "2020.08.16 03:00",
                     "eventDetail":"json test1-a",
                     "viewChild":true,
                     "tree":[
                         {
                             "id" :135,
-                            "startTime": "2020.08.03 02:00",
-				            "endTime": "2020.08.03 03:00",
+                            "startTime": "2020.08.16 02:00",
+				            "endTime": "2020.08.16 03:00",
                             "eventDetail":"json test 하위1", 
 						    "viewChild": true,
                             "tree":[]
                         },
                         {
                             "id" :1357,
-                            "startTime": "2020.08.03 02:00",
-				            "endTime": "2020.08.03 03:00",
+                            "startTime": "2020.08.16 02:00",
+				            "endTime": "2020.08.16 03:00",
                             "eventDetail":"json test 하위2", 
 						    "viewChild": true,
                             "tree":[]
@@ -34,8 +34,8 @@
                 },
                 {
                     "id" :1123,
-                    "startTime": "2020.08.03 03:00",
-                    "endTime": "2020.08.03 04:00",
+                    "startTime": "2020.08.16 03:00",
+                    "endTime": "2020.08.16 04:00",
                     "eventDetail":"json test1-b",
                     "viewChild": true,
                     "tree":[] 
@@ -44,8 +44,8 @@
         },
         {
             "id" :1132,
-            "startTime": "2020.08.05 01:00",
-            "endTime": "2020.08.05 04:00",
+            "startTime": "2020.08.18 01:00",
+            "endTime": "2020.08.18 04:00",
             "eventDetail":"json test2",
             "viewChild": true,
             "tree":[]
