@@ -143,7 +143,6 @@ class ListBlock extends Component{
 class MainCalendarBody extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
       timedata: null,
       items:null,
