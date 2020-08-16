@@ -14,7 +14,6 @@ class App extends Component {
       userName: ""
     };
   }
-  //작업을 했다고 가정하고
   permit = loginState => {
     this.setState({
       userName: loginState.name,
