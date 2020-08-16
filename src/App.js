@@ -4,17 +4,16 @@ import cs from "./CSS/App.module.css";
 import Login from "./pages/Login";
 import Main from "./pages/Main";
 
+//깃 변경사항 테스트
+//깃 변경사항 테스트 2
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isLoginned: false,
+      isLoginned: true,
       userName: ""
     };
   }
-  // 연습용 주석 달았음.
-  //이게 효곤한테 추가되면됨.
-
   permit = loginState => {
     this.setState({
       userName: loginState.name,

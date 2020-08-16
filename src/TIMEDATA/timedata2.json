@@ -1,0 +1,48 @@
+{
+    "tree": [
+        {
+            "startTime": "2020.06.30 01:00",
+            "endTime": "2020.06.30 05:00",
+            "eventDetail":"json test1" ,
+            "viewChild": true,
+            "tree": [
+                {
+                    "startTime": "2020.06.30 02:00",
+                    "endTime": "2020.06.30 03:00",
+                    "eventDetail":"json test1-1",
+                    "viewChild":true,
+                    "tree":[
+                        {
+                            "startTime": "2020.06.30 02:00",
+				            "endTime": "2020.06.30 03:00",
+                            "eventDetail":"json test1-1-1", 
+						    "viewChild": true,
+                            "tree":[]
+                        },
+                        {
+                            "startTime": "2020.06.30 02:00",
+				            "endTime": "2020.06.30 03:00",
+                            "eventDetail":"json test1-1-2", 
+						    "viewChild": true,
+                            "tree":[]
+                        }
+                    ]
+                },
+                {
+                    "startTime": "2020.06.30 03:00",
+                    "endTime": "2020.06.30 04:00",
+                    "eventDetail":"json test1-2",
+                    "viewChild": true,
+                    "tree":[] 
+                }
+            ]    
+        },
+        {
+            "startTime": "2020.07.01 01:00",
+            "endTime": "2020.07.01 04:00",
+            "eventDetail":"json test2",
+            "viewChild": true,
+            "tree":[]
+        }
+    ]
+}
