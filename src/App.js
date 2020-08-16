@@ -5,14 +5,15 @@ import Login from "./pages/Login";
 import Main from "./pages/Main";
 
 //깃 변경사항 테스트 마지막
-//변경적용
+
+
+//asdflkajs;dlfkjas;df
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       isLoginned: true,
       userName: "",
-      test:"end",
     };
   }
   permit = loginState => {
