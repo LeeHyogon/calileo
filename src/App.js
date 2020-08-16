@@ -4,6 +4,8 @@ import cs from "./CSS/App.module.css";
 import Login from "./pages/Login";
 import Main from "./pages/Main";
 
+//깃 변경사항 테스트
+//깃 변경사항 테스트 2
 class App extends Component {
   constructor(props) {
     super(props);
