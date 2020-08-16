@@ -5,7 +5,7 @@ import Login from "./pages/Login";
 import Main from "./pages/Main";
 
 //깃 변경사항 테스트 마지막
-
+//변경적용
 class App extends Component {
   constructor(props) {
     super(props);
