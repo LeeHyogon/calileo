@@ -4,10 +4,9 @@ import cs from "./CSS/App.module.css";
 import Login from "./pages/Login";
 import Main from "./pages/Main";
 
-//깃 변경사항 테스트 마지막
+//깃 변경사항 테스트
 
-
-//asdflkajs;dlfkjas;df
+//종현님 브랜치 테스트
 class App extends Component {
   constructor(props) {
     super(props);
