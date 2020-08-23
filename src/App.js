@@ -5,8 +5,7 @@ import Login from "./pages/Login";
 import Main from "./pages/Main";
 
 //깃 변경사항 테스트
-
-//종현님 브랜치 테스트
+//변경 다시체크
 class App extends Component {
   constructor(props) {
     super(props);
