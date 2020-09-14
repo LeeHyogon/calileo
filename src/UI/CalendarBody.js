@@ -201,58 +201,59 @@ class CalendarBody extends Component {
     return (
       <>
       <Container>
-        <Grid columns={1}>
-          <Topblock 
-            userName={this.props.userName}
-            pivotDay={this.props.pivotDay}
-            changePivotDay={this.props.changePivotDay} 
-            changetimeUnit={this.props.changetimeUnit}
-          />
-        </Grid>
-        <Grid columns={2}>
-          <Grid.Column computer={6} tablet={16} mobile={16} floated="left">
-          {this.state.isCreateSubNew ? (
-                <SubCreateEvent
-                  createSubNewTime={this.state.createSubNewTime}
-                  eventSubClose={this.eventSubClose}
-                  enlistSubNew={this.enlistSubNew}
+        <Grid>
+          <Grid.Row>
+            <Topblock 
+              userName={this.props.userName}
+              pivotDay={this.props.pivotDay}
+              changePivotDay={this.props.changePivotDay} 
+              changetimeUnit={this.props.changetimeUnit}
+            />
+          </Grid.Row>
+          <Grid.Row columns={2}>
+            <Grid.Column computer={6} tablet={16} mobile={16} floated="left">
+            {this.state.isCreateSubNew ? (
+                  <SubCreateEvent
+                    createSubNewTime={this.state.createSubNewTime}
+                    eventSubClose={this.eventSubClose}
+                    enlistSubNew={this.enlistSubNew}
+                  />
+                ) : null}
+              <SubCalendarBody
+              subCalendarIndex={this.state.subCalendarIndex}
+              subCalendarId={this.state.subCalendarId}
+              createSubNew={this.createSubNew}
+              isCheck={viewChild[this.state.subCalendarIndex]}
+              checkChange={this.checkChange}
+              >
+
+              </SubCalendarBody>
+              {_.map(this.state.eventList, val => (
+                <p>{`${val.eventDetail} ${val.startTime}~${val.endTime}`} </p>
+              ))}
+            </Grid.Column>
+            <Grid.Column computer={10} tablet={16} mobile={16} floated="right">
+              {this.state.isCreateNew ? (
+                <CreateEvent
+                  createNewTime={this.state.createNewTime}
+                  eventClose={this.eventClose}
+                  enlistNew={this.enlistNew}
                 />
               ) : null}
-            <SubCalendarBody
-            subCalendarIndex={this.state.subCalendarIndex}
-            subCalendarId={this.state.subCalendarId}
-            createSubNew={this.createSubNew}
-            isCheck={viewChild[this.state.subCalendarIndex]}
-            checkChange={this.checkChange}
-            >
-
-            </SubCalendarBody>
-            {_.map(this.state.eventList, val => (
-              <p>{`${val.eventDetail} ${val.startTime}~${val.endTime}`} </p>
-            ))}
-          </Grid.Column>
-          <Grid.Column computer={10} tablet={16} mobile={16} floated="right">
-            {this.state.isCreateNew ? (
-              <CreateEvent
-                createNewTime={this.state.createNewTime}
+              {/* {this.state.isCreateNewString ? <CreateStringEvent /> : null} */}
+              <MainCalendarBody
+                createNew={this.createNew}
+                createNewSubCal={this.createNewSubCal}
+                viewSubCal={this.viewSubCal}
                 eventClose={this.eventClose}
-                enlistNew={this.enlistNew}
+                createNewString={this.createNewString}
+                pivotDay={this.props.pivotDay}
+                eventList={this.state.eventList}
+                timeUnit={this.props.timeUnit} //main.js에서 받아와서 이거에 따라 maincalendar가 다르게 보여지도록 구현할 예정입니다.
+                checkValue={this.state.checkValue}
               />
-            ) : null}
-            {/* {this.state.isCreateNewString ? <CreateStringEvent /> : null} */}
-            <MainCalendarBody
-              createNew={this.createNew}
-              createNewSubCal={this.createNewSubCal}
-              viewSubCal={this.viewSubCal}
-              eventClose={this.eventClose}
-              createNewString={this.createNewString}
-              pivotDay={this.props.pivotDay}
-              eventList={this.state.eventList}
-              timeUnit={this.props.timeUnit} //main.js에서 받아와서 이거에 따라 maincalendar가 다르게 보여지도록 구현할 예정입니다.
-              checkValue={this.state.checkValue}
-            />
-          </Grid.Column>
-        </Grid>
+            </Grid.Column>
+          </Grid.Row>
       {/* <Grid column="equal">
         <Grid.Column computer={6} tablet={16} mobile={16} floated="left">
         {this.state.isCreateSubNew ? (
@@ -297,6 +298,7 @@ class CalendarBody extends Component {
           />
         </Grid.Column>
       </Grid> */}
+      </Grid>
       </Container>
       </>
     );
