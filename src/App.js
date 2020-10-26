@@ -4,15 +4,17 @@ import cs from "./CSS/App.module.css";
 import Login from "./pages/Login";
 import Main from "./pages/Main";
 
+//깃 변경사항 테스트
+//변경 다시체크
+//깃 마지막 테스트
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       isLoginned: true,
-      userName: ""
+      userName: "",
     };
   }
-  //작업을 했다고 가정하고
   permit = loginState => {
     this.setState({
       userName: loginState.name,

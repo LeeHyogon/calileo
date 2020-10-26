@@ -1,7 +1,8 @@
 import React, { Component} from "react";
 import moment from 'moment'
 import CalendarBody from "../UI/CalendarBody"
-import Topblock from "../UI/Topblock"
+import db from "../server/fb"
+
 
 class Main extends Component{
   constructor(props){
@@ -11,8 +12,9 @@ class Main extends Component{
       timeUnit:'W',
       today : moment().format("YYYYMMDD"),
     }
+    this.changePivotDay = this.changePivotDay.bind(this);
+    this.changetimeUnit = this.changetimeUnit.bind(this);
   }
-
   changePivotDay = (newPivot) => {
     this.setState({pivotDay : newPivot})
   }
@@ -20,13 +22,16 @@ class Main extends Component{
     //console.log(newUnit+"실행확인");
     this.setState({timeUnit : newUnit})
   }
-
   render(){
+    const {userName} = this.props;
+    const {pivotDay, timeUnit} = this.state;
     return(
       <div>
-      <Topblock userName = {this.props.userName} pivotDay = {this.state.pivotDay}
-      changePivotDay = {this.changePivotDay}  changetimeUnit = {this.changetimeUnit}/>
-      <CalendarBody pivotDay = {this.state.pivotDay} timeUnit = {this.state.timeUnit}/>
+        <CalendarBody pivotDay={pivotDay}
+              timeUnit={timeUnit}
+              userName={userName}
+              changePivotDay={this.changePivotDay} 
+              changetimeUnit={this.changetimeUnit}/>
       </div>
     )
   }

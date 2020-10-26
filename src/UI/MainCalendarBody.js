@@ -4,7 +4,8 @@ import _ from "lodash";
 import { Grid, Menu, Table, Segment, Checkbox, Icon} from "semantic-ui-react";
 import styled from "styled-components";
 import db from "../server/fb";
-import timedata from "../TIMEDATA/timedata.json"
+import FileUpload from "./FileUpload";
+import tmpdata from "../TIMEDATA/timedata.json"
 
 function Datetitle(props) {
   return (
@@ -47,135 +48,161 @@ const StyledButton = styled.button`
   width : ${props => props.width || '19vh'};
 `;
 
-class ChildList extends Component  {
-  constructor(props) {
-    super(props);
-    this.state = {
+// class ChildList extends Component  {
+//   constructor(props) {
+//     super(props);
+//     this.state = {
 
-    };
-  }
-  render() {
-    const {Childlist ,Chk, content, Start}=this.props;
-    console.log(Childlist);
-    var result;
-    var height, top;
-    if(Chk){
-       result = Childlist.map((v) => {
-         top = 61 * moment
-         .duration(moment(Start)
-         .diff(moment(v.startTime)))
-         .asHours() + 'px';
-         height = 61 * moment
-         .duration(moment(v.endTime)
-         .diff(moment(v.startTime)))
-         .asHours() + 'px';
-        return (
-          <StyledButton height={height} width='16vh' position="static" >{v.eventDetail}</StyledButton>
-        )
-      });
-    }
-    return (
-      <div>
-        {content}
-        {result}
-      </div>
-    )
-  }
-}
+//     };
+//   }
+//   render() {
+//     const {Childlist ,Chk, content, Start}=this.props;
+//     console.log(Childlist);
+//     var result;
+//     var height, top;
+//     if(Chk){
+//        result = Childlist.map((v) => {
+//          top = 61 * moment
+//          .duration(moment(Start)
+//          .diff(moment(v.startTime)))
+//          .asHours() + 'px';
+//          height = 61 * moment
+//          .duration(moment(v.endTime)
+//          .diff(moment(v.startTime)))
+//          .asHours() + 'px';
+//         return (
+//           <StyledButton height={height} width='16vh' position="static" >{v.eventDetail}</StyledButton>
+//         )
+//       });
+//     }
+//     return (
+//       <div>
+//         {content}
+//         {result}
+//       </div>
+//     )
+//   }
+// }
 
-function Button({ content, height, left ,index,createNewSubCal,viewChild,isChild}) {
-  return (
-    <StyledButton  onClick={()=>createNewSubCal(index)}
-      height={height} left={left}
-    >     
-      {content}
+// function Button({ content, height, left ,index,createNewSubCal,viewChild,isChild}) {
+//   return (
+//     <StyledButton  onClick={()=>createNewSubCal(index)}
+//       height={height} left={left}
+//     >     
+//       {content}
 
-    </StyledButton>
-  );
-}
+//     </StyledButton>
+//   );
+// }
 
-const Member=(tree)=>{
+// const Member=(tree)=>{
   
-  return (
-  <button onClick={()=>{
-    console.log("Map클릭");
-  }}>
-    {tree.tree.eventDetail+"Member"}
-    </button>
-  );
-}
-class ListBlock extends Component{
-  constructor(props) {
-    super(props);
-    this.state={
-    }  
-  }
-  hasChildren(tree){
-    return tree.tree &&tree.tree.length;
-  }
-  render(){
-    const level=this.props.level || 0;
-    let eventDetail=this.props.eventDetail;
-    return <button style={style2} onClick={(evt)=>{
-        evt.stopPropagation();
-        this.props.transId(this.props.id);
-    }}>
-      {this.props.eventDetail+"ListBlock"}
-      {this.props.trees.map((tree,i)=>{
-        return <div>
-          {/* <Member tree={tree}/> */}
-          <button onClick={(evt)=>{
-            // console.log(tree.id);
-            evt.stopPropagation();
-            this.props.transId(tree.id);    
-          }}>{tree.eventDetail+"underbutton"}</button>
-          {this.hasChildren(tree)&& <ListBlock trees={tree.tree}  eventDetail={tree.eventDetail}level={level+1} 
-          transId={this.props.transId} id={tree.id} 
-          />}
-        </div>
-      })}
-    </button>
-  }
-}
+//   return (
+//   <button onClick={()=>{
+//     console.log("Map클릭");
+//   }}>
+//     {tree.tree.eventDetail+"Member"}
+//     </button>
+//   );
+// }
+// class ListBlock extends Component{
+//   constructor(props) {
+//     super(props);
+//     this.state={
+//       items:[],
+//     }  
+//   }
+//   hasChildren(tree){
+//     return tree.tree &&tree.tree.length;
+//   }
+
+//   render(){
+//     const level=this.props.level || 0;
+//     let eventDetail=this.props.eventDetail;
+//     return <button style={style2} onClick={(evt)=>{
+//         evt.stopPropagation();
+//         this.props.transId(this.props.id);
+//     }}>
+//       {this.props.eventDetail+"ListBlock"}
+//       {this.props.trees.map((tree,i)=>{
+//         return <div>
+//           {/* <Member tree={tree}/> */}
+//           <button onClick={(evt)=>{
+//             // console.log(tree.id);
+//             evt.stopPropagation();
+//             this.props.transId(tree.id);    
+//           }}>{tree.eventDetail+"underbutton"}</button>
+//           {this.hasChildren(tree)&& <ListBlock trees={tree.tree}  eventDetail={tree.eventDetail}level={level+1} 
+//           transId={this.props.transId} id={tree.id} 
+//           />}
+//         </div>
+//       })}
+//     </button>
+//   }
+// }
 class MainCalendarBody extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
-      
+      timedata: null,
+      items:null,
     };
   }
+  inputDateToState=()=>{
+      // 모든문서 다넣는 코드. 
+      //   var docRef = db.collection("trees"); 
+      //   var items=[];
+      //   docRef.get().then(function(querySnapshot) {
+      //     querySnapshot.forEach(function(doc) {
+      //       items.push(doc.data());  
+      //       console.log(doc.id, " => ", doc.data());
+      //     });
+      // });
+      // this.setState({items:items});
+      // console.log(this.state.items);
+      console.log("inputDateToState함수 실행 확인");
+      var docRef=db.collection("trees").doc("LA");
+      var data;
+      docRef.get().then(function(doc) {
+        if (doc.exists) {
+            console.log("Document data:", doc.data());
+            data=doc.data();
+        } else {
+            // doc.data() will be undefined in this case
+            console.log("No such document!");
+        }
+    }).catch(function(error) {
+        console.log("Error getting document:", error);
+    });
+    this.setState({timedata:data});
+    console.log("inputDateToState함수 종료");
+  }
+  componentWillMount(){
+    this.inputDateToState();
+    console.log(this.state);
+  }
 
-  
   render() {
     const { createNew,createNewSubCal,viewSubCal,pivotDay} = this.props;
     var index = 0;
+    var id;
     var startTime=[];
     var endTime=[];
     var eventDetail=[];
     var isChild;
-    var id;
-    var viewChild=_.map(timedata.tree,'viewChild');
-    startTime=_.map(timedata.tree,'startTime');
-    endTime=_.map(timedata.tree,'endTime');
-    eventDetail=_.map(timedata.tree,'eventDetail');
-    isChild=_.map(timedata.tree,'tree');
-    id=_.map(timedata.tree,'id');
+    var viewChild;
+    // viewChild=_.map(this.state.timedata.trees,'viewChild');
+    // startTime=_.map(this.state.timedata.trees,'startTime');
+    // endTime=_.map(this.state.timedata.trees,'endTime');
+    // eventDetail=_.map(this.state.timedata.trees,'eventDetail');
+    // isChild=_.map(this.state.timedata.trees,'isChild');
     const transId = e =>{
       viewSubCal(e);
     };
-    
-    const inputFirestore = e => {
-      db.collection("users")
-        .get()
-        .then(function(querySnapshot) {
-          querySnapshot.forEach(function(doc) {
-            // startTime[index] = moment(doc.data().startTime).format("YYYY.MM.DD HH:mm");
-            // endTime[index] = moment(doc.data().endTime).format("YYYY.MM.DD HH:mm");
-            // eventDetail[index] = doc.data().eventDetail;
-            // index += 1;
-          });
-        });
-    };
+    const inputFirestore=e=>{
+      // console.log(JSON.stringify(tmpdata));
+    }
     // const mapToComponent = eventList => {
     //   startTime = _.map(eventList, "startTime");
     //   endTime = _.map(eventList, "endTime");
@@ -205,7 +232,6 @@ class MainCalendarBody extends Component {
     //     );
     //   });
     // };
-   
     return (
       <div>  
       <Table celled fixed>
@@ -223,26 +249,25 @@ class MainCalendarBody extends Component {
                   var height,width,content;
                   var eventData = [];
                   var index;
-                  startTime.map((v,i) => {
-                    if(timeVal.isBetween(moment(startTime[i]),moment(endTime[i]))
-                    || timeVal.isSame(startTime[i])
-                    ){ChkTime=true;
-                    }
-                    if(timeVal.isSame(startTime[i])
-                      ){ChkTime2=true;
-                      content = eventDetail[i];
-                      height = 61 * moment
-                      .duration(moment(endTime[i])
-                      .diff(moment(startTime[i])))
-                      .asHours() + "px";
-                      width = 19.1 + 19.3 * moment
-                      .duration(moment(endTime[i])
-                      .diff(moment(startTime[i])))
-                      .asDays() + 'vh';
-                      index=i;
-                    }
-                  });
-
+                  // startTime.map((v,i) => {
+                  //   if(timeVal.isBetween(moment(startTime[i]),moment(endTime[i]))
+                  //   || timeVal.isSame(startTime[i])
+                  //   ){ChkTime=true;
+                  //   }
+                  //   if(timeVal.isSame(startTime[i])
+                  //     ){ChkTime2=true;
+                  //     content = eventDetail[i];
+                  //     height = 61 * moment
+                  //     .duration(moment(endTime[i])
+                  //     .diff(moment(startTime[i])))
+                  //     .asHours() + "px";
+                  //     width = 19.1 + 19.3 * moment
+                  //     .duration(moment(endTime[i])
+                  //     .diff(moment(startTime[i])))
+                  //     .asDays() + 'vh';
+                  //     index=i;
+                  //   }
+                  // });
                 return (
                   //StartTime을 기준으로 Table Cell에 버튼을 만든다.
                   <Table.Cell
@@ -251,7 +276,6 @@ class MainCalendarBody extends Component {
                     onClick={ChkTime ? null : () => createNew(timeVal)}
                   >
                     <div style={style}>
-                      
                     {/* {ChkTime2 ?   <Button content={viewChild[index] ? <ChildList Start={startTime[i]} content={content} Childlist={isChild[index]} Chk={viewChild[index]}></ChildList> : content} height={height}
                                     createNewSubCal={()=>createNewSubCal(index)}
                                     isChild={isChild}
@@ -260,11 +284,11 @@ class MainCalendarBody extends Component {
                                   </Button>
                                   : timeVal.format("HH:mm")} */}
                   
-                    {ChkTime2 ?   <ListBlock trees={timedata.tree[index].tree} eventDetail={eventDetail[index]}
+                    {/* {ChkTime2 ?   <ListBlock trees={this.state.timedata.tree[index].tree} eventDetail={eventDetail[index]}
                                   transId={transId} 
                                   id={id[index]}
                                   />
-                                  : timeVal.format("HH:mm")}
+                                  : timeVal.format("HH:mm")} */}
                     </div>
                   </Table.Cell>
                 );
@@ -274,7 +298,8 @@ class MainCalendarBody extends Component {
           </Table.Body>
       </Table>
       <button onClick = {()=>this.props.createNewString()}> String으로 일정 만들기 </button>
-
+      <br></br>
+      <FileUpload></FileUpload>
       </div>
     );
   }

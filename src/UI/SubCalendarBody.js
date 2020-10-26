@@ -75,7 +75,6 @@ class SubCalendarBody extends Component{
     startTime=_.map(timedata.tree,'startTime');
     endTime=_.map(timedata.tree,'endTime');
     eventDetail=_.map(timedata.tree,'eventDetail');
-    isChild=_.map(timedata.tree,'tree');
     viewChild=_.map(timedata.tree,'viewChild');
     var node=findNode(subCalendarId,timedata);
     console.log(node);
