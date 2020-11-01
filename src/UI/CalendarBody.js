@@ -75,7 +75,6 @@ class CalendarBody extends Component {
       checkValue : false
     };
   }
-
   createNew = props => {
     this.setState({
       isCreateNew: true,
@@ -94,7 +93,7 @@ class CalendarBody extends Component {
 
   //메인캘린더에서 일정 클릭시 서브캘린더에 서브일정 보이게 해줌.
   createNewSubCal = props => {
-    var viewChild=_.map(timedata.users,'viewChild');
+    var viewChild=_.map(timedata.tree,'viewChild');
     console.log(viewChild[this.state.subCalendarIndex]);
     this.setState({ subCalendarIndex: props});
     // if(this.state.subCalendarIndex>=0){
@@ -122,7 +121,7 @@ class CalendarBody extends Component {
     //       console.error("Error adding document: ", error);
     //   });  
   const { endTime,eventDetail,startTime} = props;
-  timedata.users.push({
+  timedata.tree.push({
     startTime: startTime,
     endTime: endTime,
     eventDetail: eventDetail,
@@ -159,11 +158,11 @@ class CalendarBody extends Component {
 
   enlistSubNew = props => {
   const { endTime,eventDetail,startTime} = props;
-  timedata.users[this.state.subCalendarIndex].isChild.push({
+  timedata.tree[this.state.subCalendarIndex].tree.push({
     startTime: startTime,
     endTime: endTime,
     eventDetail: eventDetail,
-    isChild: []
+    tree: []
   })
   this.setState({
       isCreateSubNew: false
@@ -182,12 +181,12 @@ class CalendarBody extends Component {
     // console.log(checked);
     // console.log(timedata.users[this.state.subCalendarIndex]);
     // timedata.users[this.state.subCalendarIndex].viewChild=checked;
-    timedata.users[this.state.subCalendarIndex].viewChild=!checked;
+    timedata.tree[this.state.subCalendarIndex].viewChild=!checked;
     this.setState({checkValue: !this.state.checkValue});
   };
   render() {
-    var viewChild=_.map(timedata.users,'viewChild');
-
+    console.log(timedata);
+    var viewChild=_.map(timedata.tree,'viewChild');
     return (
       <Grid column="equal">
         <Grid.Column computer={6} tablet={16} mobile={16} floated="left">

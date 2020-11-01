@@ -28,12 +28,12 @@ class SubCalendarBody extends Component{
     var startTime=[];
     var endTime=[];
     var eventDetail=[];
-    var isChild,viewChild;
-    startTime=_.map(timedata.users,'startTime');
-    endTime=_.map(timedata.users,'endTime');
-    eventDetail=_.map(timedata.users,'eventDetail');
-    isChild=_.map(timedata.users,'isChild');
-    viewChild=_.map(timedata.users,'viewChild');
+    var tree,viewChild;
+    startTime=_.map(timedata.tree,'startTime');
+    endTime=_.map(timedata.tree,'endTime');
+    eventDetail=_.map(timedata.tree,'eventDetail');
+    tree=_.map(timedata.tree,'tree');
+    viewChild=_.map(timedata.tree,'viewChild');
     return(
       <Segment>
         <div>
@@ -54,7 +54,7 @@ class SubCalendarBody extends Component{
           <p>Start time : {startTime[subCalendarIndex]}</p>
           <Menu.Item onClick>
             {
-            _.map(isChild[subCalendarIndex], val => (
+            _.map(tree[subCalendarIndex], val => (
               <p>Start time : {` ${val.startTime} `} <br></br>
               End time : {` ${val.endTime} `} <br></br>
               eventDetail: {` ${val.eventDetail} `}

@@ -1,30 +1,54 @@
 {
-    "users": [
-        {
-            "startTime": "2020.06.26 01:00",
-            "endTime": "2020.06.26 05:00",
-            "eventDetail":"json test1" ,
+    "tree": [
+      {
+        "id": 1,
+        "startTime": "2020.11.01 01:00",
+        "endTime": "2020.11.01 05:00",
+        "eventDetail": "json test1",
+        "viewChild": true,
+        "tree": [
+          {
+            "id": 13,
+            "startTime": "2020.11.01 02:00",
+            "endTime": "2020.11.01 03:00",
+            "eventDetail": "json test1-a",
             "viewChild": true,
-            "isChild": [
-                {
-                    "startTime": "2020.06.26 02:00",
-                    "endTime": "2020.06.26 03:00",
-                    "eventDetail":"json test1-1" 
-                },
-                {
-                    "startTime": "2020.06.26 03:00",
-                    "endTime": "2020.06.26 04:00",
-                    "eventDetail":"json test1-2" 
-                }
+            "tree": [
+              {
+                "id": 135,
+                "startTime": "2020.11.01 02:00",
+                "endTime": "2020.11.01 03:00",
+                "eventDetail": "json test 하위1",
+                "viewChild": true,
+                "tree": []
+              },
+              {
+                "id": 1357,
+                "startTime": "2020.11.01 02:00",
+                "endTime": "2020.11.01 03:00",
+                "eventDetail": "json test 하위2",
+                "viewChild": true,
+                "tree": []
+              }
             ]
-            
-        },
-        {
-            "startTime": "2020.06.27 01:00",
-            "endTime": "2020.06.27 04:00",
-            "eventDetail":"json test2",
+          },
+          {
+            "id": 1123,
+            "startTime": "2020.11.01 03:00",
+            "endTime": "2020.11.01 04:00",
+            "eventDetail": "json test1-b",
             "viewChild": true,
-            "isChild":[]
-        }
+            "tree": []
+          }
+        ]
+      },
+      {
+        "id": 1132,
+        "startTime": "2020.11.03 01:00",
+        "endTime": "2020.11.03 04:00",
+        "eventDetail": "json test2",
+        "viewChild": true,
+        "tree": []
+      }
     ]
 }
