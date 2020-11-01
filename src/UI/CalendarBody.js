@@ -125,7 +125,7 @@ class CalendarBody extends Component {
     startTime: startTime,
     endTime: endTime,
     eventDetail: eventDetail,
-    isChild: []
+    tree: []
   });
   var fs = require('browserify-fs');
   // var path = require('path');
