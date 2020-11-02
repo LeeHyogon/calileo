@@ -76,6 +76,7 @@ class CalendarBody extends Component {
       checkValue : false
     };
   }
+
   createNew = props => {
     this.setState({
       isCreateNew: true,
@@ -186,13 +187,13 @@ class CalendarBody extends Component {
     // console.log(checked);
     // console.log(timedata.users[this.state.subCalendarIndex]);
     // timedata.users[this.state.subCalendarIndex].viewChild=checked;
-    timedata.tree[this.state.subCalendarIndex].viewChild=!checked;
+    timedata.users[this.state.subCalendarIndex].viewChild=!checked;
     this.setState({checkValue: !this.state.checkValue});
   };
   
   render() {
-    console.log(timedata);
-    var viewChild=_.map(timedata.tree,'viewChild');
+    var viewChild=_.map(timedata.users,'viewChild');
+
     return (
       <Grid column="equal">
         <Grid.Column computer={6} tablet={16} mobile={16} floated="left">

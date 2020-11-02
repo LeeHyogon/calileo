@@ -34,11 +34,7 @@ class Topblock extends Component{
       value : 'w'
     }
   }
-  valueChange = (e, {value}) =>{ {this.setState({ value });
-    console.log(value); 
-  }
-  
-  }
+  valueChange = (e, {value}) => this.setState({ value })
 
   render(){
     const {userName, pivotDay, changePivotDay, changetimeUnit } = this.props
@@ -79,11 +75,8 @@ class Topblock extends Component{
                     selection
                     options={friendOptions}
                     value = {value}
-                    onChange = {this.valueChange}
-                    // onChange ={()=>this.props.changetimeUnit(this.state.value)}
-                    //timeunit을 바꾼 것을 value에 전달
-                    onClick = {()=>this.props.changetimeUnit(this.state.value)}
-                    //바뀐 value를 함수를 통해  main.js로 보냄
+                    onChange = {this.valueChange}//timeunit을 바꾼 것을 value에 전달
+                    onClick = {()=>this.props.changetimeUnit(this.state.value)}//바뀐 value를 함수를 통해  main.js로 보냄
                   />
                 </Menu.Item>
               </Menu.Menu>

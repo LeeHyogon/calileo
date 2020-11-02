@@ -8,7 +8,7 @@ class Main extends Component{
     super(props)
     this.state = {
       pivotDay : moment().startOf("week").format("YYYYMMDD"),
-      timeUnit:'w',
+      timeUnit:'W',
       today : moment().format("YYYYMMDD"),
     }
   }
@@ -17,9 +17,8 @@ class Main extends Component{
     this.setState({pivotDay : newPivot})
   }
   changetimeUnit = (newUnit) => {
-    // console.log(newUnit+"실행확인");
+    //console.log(newUnit+"실행확인");
     this.setState({timeUnit : newUnit})
-
   }
 
   render(){
