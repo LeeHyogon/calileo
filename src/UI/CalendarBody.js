@@ -76,7 +76,6 @@ class CalendarBody extends Component {
       checkValue : false
     };
   }
-
   createNew = props => {
     this.setState({
       isCreateNew: true,
@@ -131,7 +130,7 @@ class CalendarBody extends Component {
     startTime: startTime,
     endTime: endTime,
     eventDetail: eventDetail,
-    isChild: []
+    tree: []
   });
   var fs = require('browserify-fs');
   // var path = require('path');
@@ -187,13 +186,13 @@ class CalendarBody extends Component {
     // console.log(checked);
     // console.log(timedata.users[this.state.subCalendarIndex]);
     // timedata.users[this.state.subCalendarIndex].viewChild=checked;
-    timedata.users[this.state.subCalendarIndex].viewChild=!checked;
+    timedata.tree[this.state.subCalendarIndex].viewChild=!checked;
     this.setState({checkValue: !this.state.checkValue});
   };
   
   render() {
-    var viewChild=_.map(timedata.users,'viewChild');
-
+    console.log(timedata);
+    var viewChild=_.map(timedata.tree,'viewChild');
     return (
       <Grid column="equal">
         <Grid.Column computer={6} tablet={16} mobile={16} floated="left">

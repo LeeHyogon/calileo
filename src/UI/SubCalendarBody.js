@@ -14,16 +14,16 @@ function findNode(id,currentNode) {
       result=findNode(id,node);
       if(result!=false){
         return result;
-      } 
+      }
     }
-    return false; 
+    return false;
   }
 }
 class ListBlock extends Component{
   constructor(props) {
     super(props);
     this.state={
-    }  
+    }
   }
   hasChildren(node){
     return node.tree &&node.tree.length;
@@ -37,7 +37,7 @@ class ListBlock extends Component{
         return <div>
           {nodeChild.eventDetail} <br></br>
           {nodeChild.startTime}   <br></br>
-          {this.hasChildren(nodeChild)&& <ListBlock node={nodeChild} level={level+1} 
+          {this.hasChildren(nodeChild)&& <ListBlock node={nodeChild} level={level+1}
           />}
           {nodeChild.endTime}   <br></br>
         </div>
@@ -71,18 +71,42 @@ class SubCalendarBody extends Component{
     var startTime=[];
     var endTime=[];
     var eventDetail=[];
-    var isChild,viewChild;
+    var tree,viewChild;
     startTime=_.map(timedata.tree,'startTime');
     endTime=_.map(timedata.tree,'endTime');
     eventDetail=_.map(timedata.tree,'eventDetail');
-    isChild=_.map(timedata.tree,'tree');
+    tree=_.map(timedata.tree,'tree');
     viewChild=_.map(timedata.tree,'viewChild');
-    var node=findNode(subCalendarId,timedata);
-    console.log(node);
-
     return(
       <Segment>
-       {node ? <ListBlock node={node} /> : null}
+        <div>
+          { <p>{`${eventDetail[subCalendarIndex]}`} </p>}
+          <button onClick={()=>this.props.createSubNew(moment(startTime[subCalendarIndex]))}>세부일정 생성</button>
+          <br></br>
+          <p>세부일정 보기
+            <input
+            name="isGoing"
+            type="checkbox"
+            checked={this.props.isCheck}
+            onChange={()=>this.props.checkChange(this.props.isCheck)}
+            onClick={this.handleChange}
+            /></p>
+
+        </div>
+        <Menu fluid vertical>
+          <p>Start time : {startTime[subCalendarIndex]}</p>
+          <Menu.Item onClick>
+            {
+            _.map(tree[subCalendarIndex], val => (
+              <p>Start time : {` ${val.startTime} `} <br></br>
+              End time : {` ${val.endTime} `} <br></br>
+              eventDetail: {` ${val.eventDetail} `}
+              </p>
+            ))}
+
+          </Menu.Item>
+          <p>End Time : {endTime[subCalendarIndex]} </p>
+        </Menu>
       </Segment>
     )
   }
