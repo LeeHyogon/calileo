@@ -19,6 +19,25 @@ function Datetitle(props) {
     </Table.Header>
   );
 }
+function Monthtitle(props) {
+  return (
+    <Table.Header>
+    {_.map(Array(7), (val, index) => (
+      <Table.HeaderCell width={2}>
+        {moment(props)
+          .add(index, "d")
+          .format("ddd")}
+      </Table.HeaderCell>
+    ))}
+  </Table.Header>
+  );
+}
+
+function Daytitle(props) {
+  return (
+    moment(props).format("DD(ddd)")
+  );
+}
 const style = {
   height: '60px',
   verticalAlign: 'middle',
@@ -56,7 +75,7 @@ class ChildList extends Component  {
   }
   render() {
     const {Childlist ,Chk, content, Start}=this.props;
-    console.log(Childlist);
+
     var result;
     var height, top;
     if(Chk){
@@ -72,6 +91,7 @@ class ChildList extends Component  {
         return (
           <StyledButton height={height} width='16vh' position="static" >{v.eventDetail}</StyledButton>
         )
+
       });
     }
     return (
@@ -87,7 +107,7 @@ function Button({ content, height, left ,index,createNewSubCal,viewChild,isChild
   return (
     <StyledButton  onClick={()=>createNewSubCal(index)}
       height={height} left={left}
-    >     
+    >
       {content}
 
     </StyledButton>
@@ -95,7 +115,7 @@ function Button({ content, height, left ,index,createNewSubCal,viewChild,isChild
 }
 
 const Member=(tree)=>{
-  
+
   return (
   <button onClick={()=>{
     console.log("Map클릭");
@@ -108,7 +128,7 @@ class ListBlock extends Component{
   constructor(props) {
     super(props);
     this.state={
-    }  
+    }
   }
   hasChildren(tree){
     return tree.tree &&tree.tree.length;
@@ -127,10 +147,10 @@ class ListBlock extends Component{
           <button onClick={(evt)=>{
             // console.log(tree.id);
             evt.stopPropagation();
-            this.props.transId(tree.id);    
+            this.props.transId(tree.id);
           }}>{tree.eventDetail+"underbutton"}</button>
-          {this.hasChildren(tree)&& <ListBlock trees={tree.tree}  eventDetail={tree.eventDetail}level={level+1} 
-          transId={this.props.transId} id={tree.id} 
+          {this.hasChildren(tree)&& <ListBlock trees={tree.tree}  eventDetail={tree.eventDetail}level={level+1}
+          transId={this.props.transId} id={tree.id}
           />}
         </div>
       })}
@@ -141,29 +161,23 @@ class MainCalendarBody extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      
+
     };
   }
 
-  
   render() {
-    const { createNew,createNewSubCal,viewSubCal,pivotDay} = this.props;
+
+    const { createNew,createNewSubCal,pivotDay,timeUnit} = this.props;
     var index = 0;
     var startTime=[];
     var endTime=[];
     var eventDetail=[];
     var isChild;
-    var id;
     var viewChild=_.map(timedata.tree,'viewChild');
     startTime=_.map(timedata.tree,'startTime');
     endTime=_.map(timedata.tree,'endTime');
     eventDetail=_.map(timedata.tree,'eventDetail');
     isChild=_.map(timedata.tree,'tree');
-    id=_.map(timedata.tree,'id');
-    const transId = e =>{
-      viewSubCal(e);
-    };
-    
     const inputFirestore = e => {
       db.collection("users")
         .get()
@@ -205,10 +219,11 @@ class MainCalendarBody extends Component {
     //     );
     //   });
     // };
-   
+
     return (
-      <div>  
-      <Table celled fixed>
+      <div>
+
+      {timeUnit=='w' ?(<Table celled fixed>
         {Datetitle(pivotDay)}
         <Table.Body>
           {_.map(Array(24), (val, timeIndex) => (
@@ -251,7 +266,7 @@ class MainCalendarBody extends Component {
                     onClick={ChkTime ? null : () => createNew(timeVal)}
                   >
                     <div style={style}>
-                      
+
                     {/* {ChkTime2 ?   <Button content={viewChild[index] ? <ChildList Start={startTime[i]} content={content} Childlist={isChild[index]} Chk={viewChild[index]}></ChildList> : content} height={height}
                                     createNewSubCal={()=>createNewSubCal(index)}
                                     isChild={isChild}
@@ -259,9 +274,9 @@ class MainCalendarBody extends Component {
                                   >
                                   </Button>
                                   : timeVal.format("HH:mm")} */}
-                  
+
                     {ChkTime2 ?   <ListBlock trees={timedata.tree[index].tree} eventDetail={eventDetail[index]}
-                                  transId={transId} 
+                                  transId={transId}
                                   id={id[index]}
                                   />
                                   : timeVal.format("HH:mm")}
@@ -272,8 +287,95 @@ class MainCalendarBody extends Component {
             </Table.Row>
           ))}
           </Table.Body>
-      </Table>
-      <button onClick = {()=>this.props.createNewString()}> String으로 일정 만들기 </button>
+      </Table>) : null}
+
+
+      {timeUnit=='M' ?(<Table celled fixed>
+        {Monthtitle(pivotDay)}
+
+    <Table.Body>
+      {_.map(Array(6),(val,index)=> (
+        <Table.Row>
+        {_.map(Array(7), (val, index2) => {
+          let dayVal= moment(pivotDay).add(index,"week")
+          .add(index2,"d");
+          let dayText=moment(pivotDay).add(index,"week")
+          .add(index2,"d").format("MM/DD");
+
+          return (<Table.Cell height={100}
+          selectable
+          verticalAlign="top"
+          >
+          {dayText}
+          </Table.Cell>
+          );
+        })}
+      </Table.Row>
+      ))}
+    </Table.Body>
+      </Table>) : null}
+
+      {timeUnit=='d' ?(<Table celled fixed>
+       {Daytitle(pivotDay)}
+       <Table.Body>
+          {_.map(Array(24), (val, timeIndex) => (
+            <Table.Row>
+              {_.map(Array(1), (val2, dayIndex) => {
+                let timeVal = moment(pivotDay)
+                  .add(dayIndex, "d")
+                  .add(timeIndex, "h");
+                  var ChkTime = false;
+                  var ChkTime2 = false;
+                  var i=0;
+                  var height,width,content;
+                  var eventData = [];
+                  var index;
+                  startTime.map((v,i) => {
+                    if(timeVal.isBetween(moment(startTime[i]),moment(endTime[i]))
+                    || timeVal.isSame(startTime[i])
+                    ){ChkTime=true;
+                    }
+                    if(timeVal.isSame(startTime[i])
+                      ){ChkTime2=true;
+                      content = eventDetail[i];
+                      height = 61 * moment
+                      .duration(moment(endTime[i])
+                      .diff(moment(startTime[i])))
+                      .asHours() + "px";
+                      width = 19.1 + 19.3 * moment
+                      .duration(moment(endTime[i])
+                      .diff(moment(startTime[i])))
+                      .asDays() + 'vh';
+                      index=i;
+                    }
+                  });
+
+                return (
+                  //StartTime을 기준으로 Table Cell에 버튼을 만든다.
+                  <Table.Cell
+                    selectable
+                    verticalAlign="top"
+                    onClick={ChkTime ? null : () => createNew(timeVal)}
+                  >
+
+                    <div style={style}>
+                    {ChkTime2 ?   <Button content={viewChild[index] ? <ChildList Start={startTime[i]} content={content} Childlist={isChild[index]} Chk={viewChild[index]}></ChildList> : content} height={height}
+                                    createNewSubCal={()=>createNewSubCal(index)}
+                                    isChild={isChild}
+                                    viewChild={viewChild}
+                                  >
+
+                                  </Button>
+                                  : timeVal.format("HH:mm")}
+                    </div>
+                  </Table.Cell>
+                );
+              })}
+            </Table.Row>
+          ))}
+          </Table.Body>
+      </Table>) : null}
+
 
       </div>
     );
