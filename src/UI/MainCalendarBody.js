@@ -88,7 +88,7 @@ const StyledButton = styled.button`
 //   return (
 //     <StyledButton  onClick={()=>createNewSubCal(index)}
 //       height={height} left={left}
-//     >     
+//     >
 //       {content}
 
 //     </StyledButton>
@@ -96,7 +96,7 @@ const StyledButton = styled.button`
 // }
 
 // const Member=(tree)=>{
-  
+
 //   return (
 //   <button onClick={()=>{
 //     console.log("Map클릭");
@@ -110,7 +110,7 @@ const StyledButton = styled.button`
 //     super(props);
 //     this.state={
 //       items:[],
-//     }  
+//     }
 //   }
 //   hasChildren(tree){
 //     return tree.tree &&tree.tree.length;
@@ -130,10 +130,10 @@ const StyledButton = styled.button`
 //           <button onClick={(evt)=>{
 //             // console.log(tree.id);
 //             evt.stopPropagation();
-//             this.props.transId(tree.id);    
+//             this.props.transId(tree.id);
 //           }}>{tree.eventDetail+"underbutton"}</button>
-//           {this.hasChildren(tree)&& <ListBlock trees={tree.tree}  eventDetail={tree.eventDetail}level={level+1} 
-//           transId={this.props.transId} id={tree.id} 
+//           {this.hasChildren(tree)&& <ListBlock trees={tree.tree}  eventDetail={tree.eventDetail}level={level+1}
+//           transId={this.props.transId} id={tree.id}
 //           />}
 //         </div>
 //       })}
@@ -150,12 +150,12 @@ class MainCalendarBody extends Component {
     };
   }
   inputDateToState=()=>{
-      // 모든문서 다넣는 코드. 
-      //   var docRef = db.collection("trees"); 
+      // 모든문서 다넣는 코드.
+      //   var docRef = db.collection("trees");
       //   var items=[];
       //   docRef.get().then(function(querySnapshot) {
       //     querySnapshot.forEach(function(doc) {
-      //       items.push(doc.data());  
+      //       items.push(doc.data());
       //       console.log(doc.id, " => ", doc.data());
       //     });
       // });
@@ -233,7 +233,7 @@ class MainCalendarBody extends Component {
     //   });
     // };
     return (
-      <div>  
+      <div>
       <Table celled fixed>
         {Datetitle(pivotDay)}
         <Table.Body>
@@ -283,9 +283,9 @@ class MainCalendarBody extends Component {
                                   >
                                   </Button>
                                   : timeVal.format("HH:mm")} */}
-                  
+
                     {/* {ChkTime2 ?   <ListBlock trees={this.state.timedata.tree[index].tree} eventDetail={eventDetail[index]}
-                                  transId={transId} 
+                                  transId={transId}
                                   id={id[index]}
                                   />
                                   : timeVal.format("HH:mm")} */}

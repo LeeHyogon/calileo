@@ -75,7 +75,6 @@ class CalendarBody extends Component {
       createSubNewTime: "",
       eventList: [],
       subCalendarIndex: -1,
-      subCalendarId:0,
       checkValue : false
     };
   }
@@ -203,10 +202,10 @@ class CalendarBody extends Component {
       <Container>
         <Grid>
           <Grid.Row>
-            <Topblock 
+            <Topblock
               userName={this.props.userName}
               pivotDay={this.props.pivotDay}
-              changePivotDay={this.props.changePivotDay} 
+              changePivotDay={this.props.changePivotDay}
               changetimeUnit={this.props.changetimeUnit}
             />
           </Grid.Row>
@@ -265,16 +264,13 @@ class CalendarBody extends Component {
             ) : null}
           <SubCalendarBody
           subCalendarIndex={this.state.subCalendarIndex}
-          subCalendarId={this.state.subCalendarId}
           createSubNew={this.createSubNew}
           isCheck={viewChild[this.state.subCalendarIndex]}
           checkChange={this.checkChange}
           >
 
           </SubCalendarBody>
-          {_.map(this.state.eventList, val => (
-            <p>{`${val.eventDetail} ${val.startTime}~${val.endTime}`} </p>
-          ))}
+
         </Grid.Column>
         <Grid.Column computer={10} tablet={16} mobile={16} floated="right">
           {this.state.isCreateNew ? (
@@ -288,7 +284,6 @@ class CalendarBody extends Component {
           <MainCalendarBody
             createNew={this.createNew}
             createNewSubCal={this.createNewSubCal}
-            viewSubCal={this.viewSubCal}
             eventClose={this.eventClose}
             createNewString={this.createNewString}
             pivotDay={this.props.pivotDay}

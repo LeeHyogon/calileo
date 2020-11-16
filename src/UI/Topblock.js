@@ -40,14 +40,15 @@ class Topblock extends Component{
     const {userName, pivotDay, changePivotDay, changetimeUnit } = this.props
     const {value, options} = this.state
     return(
-        <>
-        <Grid columns={2}>
+      <div>
+      <Container>
+        <Grid>
           <Grid.Column computer={8} tablet={16} mobile={16}
                     floated='left'
           >
             <Menu secondary compact>
               <Menu.Menu>
-                {/* <Menu.Item>
+                <Menu.Item>
                   <Button basic>
                     <Button.Content>
                       <Icon name='list ul' />
@@ -60,7 +61,7 @@ class Topblock extends Component{
                       <Icon name='save outline' />
                     </Button.Content>
                   </Button>
-                </Menu.Item> */}
+                </Menu.Item>
                 <Menu.Item>
                   <Button.Group basic >
                     <Button icon='chevron left'  onClick = {()=>this.props.changePivotDay(moment(this.props.pivotDay).subtract(1, this.state.value))}/>
@@ -68,6 +69,14 @@ class Topblock extends Component{
                     <Button icon='chevron right' onClick = {()=>this.props.changePivotDay(moment(this.props.pivotDay).add(1, this.state.value))} />
                   </Button.Group>
                 </Menu.Item>
+              </Menu.Menu>
+            </Menu>
+          </Grid.Column>
+          <Grid.Column computer={8} tablet={16} mobile={16}
+                      floated='right'
+          >
+            <Menu secondary compact>
+              <Menu.Menu>
                 <Menu.Item>
                   <Dropdown
                     placeholder='Select Date'
@@ -79,14 +88,6 @@ class Topblock extends Component{
                     onClick = {()=>this.props.changetimeUnit(this.state.value)}//바뀐 value를 함수를 통해  main.js로 보냄
                   />
                 </Menu.Item>
-              </Menu.Menu>
-            </Menu>
-          </Grid.Column>
-          <Grid.Column computer={8} tablet={16} mobile={16}
-                      floated='left'
-          >
-            <Menu secondary compact>
-              <Menu.Menu>
                 <Menu.Item>
                   <Input icon='search' placeholder='Search task...' />
                 </Menu.Item>
@@ -101,7 +102,8 @@ class Topblock extends Component{
             </Menu>
           </Grid.Column>
         </Grid>
-        </>
+      </Container>
+      </div>
     )
   }
 }
