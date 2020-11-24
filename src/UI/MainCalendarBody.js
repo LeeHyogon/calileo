@@ -66,6 +66,7 @@ const StyledButton = styled.button`
   width : ${props => props.width || '19vh'};
 `;
 
+
 class ChildList extends Component  {
   constructor(props) {
     super(props);
@@ -84,6 +85,7 @@ class ChildList extends Component  {
          .duration(moment(Start)
          .diff(moment(v.startTime)))
          .asHours() + 'px';
+
          height = 61 * moment
          .duration(moment(v.endTime)
          .diff(moment(v.startTime)))
@@ -108,60 +110,18 @@ function Button({ content, height, left ,index,createNewSubCal,viewChild,isChild
     <StyledButton  onClick={()=>createNewSubCal(index)}
       height={height} left={left}
     >
+      {/* { <ChildList Childlist={isChild[index]} Chk={true}></ChildList>} */}
       {content}
 
     </StyledButton>
   );
 }
 
-const Member=(tree)=>{
 
-  return (
-  <button onClick={()=>{
-    console.log("Map클릭");
-  }}>
-    {tree.tree.eventDetail+"Member"}
-    </button>
-  );
-}
-class ListBlock extends Component{
-  constructor(props) {
-    super(props);
-    this.state={
-    }
-  }
-  hasChildren(tree){
-    return tree.tree &&tree.tree.length;
-  }
-  render(){
-    const level=this.props.level || 0;
-    let eventDetail=this.props.eventDetail;
-    return <button style={style2} onClick={(evt)=>{
-        evt.stopPropagation();
-        this.props.transId(this.props.id);
-    }}>
-      {this.props.eventDetail+"ListBlock"}
-      {this.props.trees.map((tree,i)=>{
-        return <div>
-          {/* <Member tree={tree}/> */}
-          <button onClick={(evt)=>{
-            // console.log(tree.id);
-            evt.stopPropagation();
-            this.props.transId(tree.id);
-          }}>{tree.eventDetail+"underbutton"}</button>
-          {this.hasChildren(tree)&& <ListBlock trees={tree.tree}  eventDetail={tree.eventDetail}level={level+1}
-          transId={this.props.transId} id={tree.id}
-          />}
-        </div>
-      })}
-    </button>
-  }
-}
 class MainCalendarBody extends Component {
   constructor(props) {
     super(props);
     this.state = {
-
     };
   }
 
@@ -219,7 +179,6 @@ class MainCalendarBody extends Component {
     //     );
     //   });
     // };
-
     return (
       <div>
 
@@ -265,20 +224,15 @@ class MainCalendarBody extends Component {
                     verticalAlign="top"
                     onClick={ChkTime ? null : () => createNew(timeVal)}
                   >
-                    <div style={style}>
 
-                    {/* {ChkTime2 ?   <Button content={viewChild[index] ? <ChildList Start={startTime[i]} content={content} Childlist={isChild[index]} Chk={viewChild[index]}></ChildList> : content} height={height}
+                    <div style={style}>
+                    {ChkTime2 ?   <Button content={viewChild[index] ? <ChildList Start={startTime[i]} content={content} Childlist={isChild[index]} Chk={viewChild[index]}></ChildList> : content} height={height}
                                     createNewSubCal={()=>createNewSubCal(index)}
                                     isChild={isChild}
                                     viewChild={viewChild}
                                   >
-                                  </Button>
-                                  : timeVal.format("HH:mm")} */}
 
-                    {ChkTime2 ?   <ListBlock trees={timedata.tree[index].tree} eventDetail={eventDetail[index]}
-                                  transId={transId}
-                                  id={id[index]}
-                                  />
+                                  </Button>
                                   : timeVal.format("HH:mm")}
                     </div>
                   </Table.Cell>

@@ -72,7 +72,6 @@ class CalendarBody extends Component {
       createSubNewTime: "",
       eventList: [],
       subCalendarIndex: -1,
-      subCalendarId:0,
       checkValue : false
     };
   }
@@ -83,9 +82,9 @@ class CalendarBody extends Component {
     });
   };
 
-  //세부일정 생성 버튼 
+  //세부일정 생성 버튼
   createSubNew = props => {
-   
+
     this.setState({
       isCreateSubNew: true,
       createSubNewTime: props.format("YYYY.MM.DD HH:mm")
@@ -100,11 +99,7 @@ class CalendarBody extends Component {
     // if(this.state.subCalendarIndex>=0){
     //   console.log(timedata.users[this.state.subCalendarIndex]);
     // }
-    
-  };
-  viewSubCal = props => {
-    console.log(props);
-    this.setState({subCalendarId:props});
+
   };
 
   createNewString = props => {
@@ -124,7 +119,7 @@ class CalendarBody extends Component {
     //   })
     //   .catch(function(error) {
     //       console.error("Error adding document: ", error);
-    //   });  
+    //   });
   const { endTime,eventDetail,startTime} = props;
   timedata.tree.push({
     startTime: startTime,
@@ -153,7 +148,7 @@ class CalendarBody extends Component {
     //   isChild : []
     // }); //add some data
     // json = JSON.stringify(json); //convert it back to json
-    fs.writeFile('../TIMEDATA/timedata.json', JSON.stringify(timedata), 'utf8'); // write it back 
+    fs.writeFile('../TIMEDATA/timedata.json', JSON.stringify(timedata), 'utf8'); // write it back
 
   this.setState({
       eventList: _.concat(this.state.eventList, props),
@@ -189,7 +184,6 @@ class CalendarBody extends Component {
     timedata.tree[this.state.subCalendarIndex].viewChild=!checked;
     this.setState({checkValue: !this.state.checkValue});
   };
-  
   render() {
     console.log(timedata);
     var viewChild=_.map(timedata.tree,'viewChild');
@@ -203,18 +197,15 @@ class CalendarBody extends Component {
                 enlistSubNew={this.enlistSubNew}
               />
             ) : null}
-          <SubCalendarBody 
+          <SubCalendarBody
           subCalendarIndex={this.state.subCalendarIndex}
-          subCalendarId={this.state.subCalendarId}
           createSubNew={this.createSubNew}
           isCheck={viewChild[this.state.subCalendarIndex]}
           checkChange={this.checkChange}
           >
 
           </SubCalendarBody>
-          {_.map(this.state.eventList, val => (
-            <p>{`${val.eventDetail} ${val.startTime}~${val.endTime}`} </p>
-          ))}
+          
         </Grid.Column>
         <Grid.Column computer={10} tablet={16} mobile={16} floated="right">
           {this.state.isCreateNew ? (
@@ -228,7 +219,6 @@ class CalendarBody extends Component {
           <MainCalendarBody
             createNew={this.createNew}
             createNewSubCal={this.createNewSubCal}
-            viewSubCal={this.viewSubCal}
             eventClose={this.eventClose}
             createNewString={this.createNewString}
             pivotDay={this.props.pivotDay}
